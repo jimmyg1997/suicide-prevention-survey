@@ -49,15 +49,24 @@ class SurveyHandler():
         }
 
     def get_survey_result(self):
-        st.title("Mental Health Risk Assessment")
+        st.title("Ερωτηματολόγιο Αξιολόγησης Αυτοκτονικού Κινδύνου")
 
         # Collecting required information
-        doctor_name = st.text_input("Doctor's Full Name", "")
-        doctor_id = st.text_input("Doctor's ID/VAT", "")
-        patient_name = st.text_input("Patient's Full Name", "")
-        patient_id = st.text_input("Patient's ID/VAT", "")
+        doctor_name = st.text_input("Ονοματεπώνυμο Γιατρού", "")
+        #doctor_id = st.text_input("ΑΦΜ Γιατρού", "")
+        patient_name = st.text_input("Ονοματεπώνυμο Ασθενή", "")
+        #patient_id = st.text_input("ΑΦΜ Ασθενή", "")
+        patient_age = st.text_input("Ηλικία Ασθενή", "")
 
-        if not all([doctor_name, doctor_id, patient_name, patient_id]):
+        metadata = {
+            "doctor_name" : doctor_name,
+            #"doctor_id"   : doctor_id,
+            "patient_name" : patient_name,
+            #"patient_id" : patient_id,
+            "patient_age" : patient_age
+        }
+
+        if not all([doctor_name, patient_name, patient_age]): # doctor_id, patient_id
             st.error("All fields are required to proceed.")
             return
 
@@ -66,9 +75,9 @@ class SurveyHandler():
             st.session_state.responses = []
         
         # Start Questionnaire
-        self.ask_q1(doctor_name, doctor_id, patient_name, patient_id)
+        self.ask_q1(metadata)
 
-    def ask_q1(self, doctor_name, doctor_id, patient_name, patient_id):
+    def ask_q1(self, metadata):
         st.subheader("Ερώτηση 1: Σκέψεις-Ευχές θανάτου")
         q1 = st.radio(
             "Είχατε τον τελευταίο μήνα σκέψεις ότι δεν αξίζει η ζωή, ότι δεν θέλετε να ζείτε, ή όταν πάτε για ύπνο σκέπτεστε ότι θα ήταν καλύτερα να μην ξυπνήσετε;", 
@@ -77,56 +86,66 @@ class SurveyHandler():
         )
 
         if q1 == "Ναι":
-            self.store_response("Ερώτηση 1", self.questions["Ερώτηση 1"], q1, doctor_name, doctor_id, patient_name, patient_id)
-            self.ask_q2(doctor_name, doctor_id, patient_name, patient_id)
+            result = ""
+            self.store_response("Ερώτηση 1", self.questions["Ερώτηση 1"], q1, metadata, result)
+            self.ask_q2(metadata)
+
         elif q1 == "Όχι":
-            self.store_response("Ερώτηση 1", self.questions["Ερώτηση 1"], q1, doctor_name, doctor_id, patient_name, patient_id)
-            st.markdown('<p style="color:green;">Παρακολούθηση κατά την επόμενη επίσκεψη</p>', unsafe_allow_html=True)
+            result = "Παρακολούθηση κατά την επόμενη επίσκεψη"
+            self.store_response("Ερώτηση 1", self.questions["Ερώτηση 1"], q1, metadata, result)
+            st.markdown(f'<p style="color:green;">{result}</p>', unsafe_allow_html=True)
 
 
-    def ask_q2(self, doctor_name, doctor_id, patient_name, patient_id):
+    def ask_q2(self, metadata):
         st.subheader("Ερώτηση 2: Ιστορικό Αποπειρών Αυτοκτονίας")
         q2 = st.radio(
             "Έχετε κάνει ποτέ κάποια απόπειρα αυτοκτονίας;",
             options = ["Ναι", "Όχι"],
             index = None # Do not preselect any option
         )
+        result = ""
+        self.store_response("Ερώτηση 2", self.questions["Ερώτηση 2"], q2, metadata, result)
+        self.ask_q3(metadata, q2)
 
-        self.store_response("Ερώτηση 2", self.questions["Ερώτηση 2"], q2, doctor_name, doctor_id, patient_name, patient_id)
-        self.ask_q3(doctor_name, doctor_id, patient_name, patient_id, q2)
 
-
-    def ask_q3(self, doctor_name, doctor_id, patient_name, patient_id, q2):
+    def ask_q3(self, metadata, q2):
         st.subheader("Ερώτηση 3: Κληρονομικότητα")
         q3 = st.radio(
             "Υπάρχει κάποιο άτομο στο οικογενειακό σας περιβάλλον που έχει αυτοκτονήσει ή που έχει κάνει απόπειρα αυτοκτονίας;",
             options = ["Ναι", "Όχι"],
             index = None # Do not preselect any option
         )
+        result = ""
+        self.store_response("Ερώτηση 3", self.questions["Ερώτηση 3"], q3, metadata, result)
+        self.ask_q4(metadata, q2, q3)
 
-        self.store_response("Ερώτηση 3", self.questions["Ερώτηση 3"], q3, doctor_name, doctor_id, patient_name, patient_id)
-        self.ask_q4(doctor_name, doctor_id, patient_name, patient_id, q2, q3)
 
-
-    def ask_q4(self, doctor_name, doctor_id, patient_name, patient_id, q2, q3):
+    def ask_q4(self, metadata, q2, q3):
         st.subheader("Ερώτηση 4: Αυτοκτονικές Σκέψεις στο Παρόν")
         q4 = st.radio(
             "Είχατε τον τελευταίο μήνα σκέψεις να αυτοκτονήσετε / να βλάψετε τον εαυτό σας;",
             options = ["Ναι", "Όχι"],
             index = None,  # Do not preselect any option
         )
-        
-
-        self.store_response("Ερώτηση 4", self.questions["Ερώτηση 4"], q4, doctor_name, doctor_id, patient_name, patient_id)
 
         if q4 == "Ναι":
-            self.ask_q5(doctor_name, doctor_id, patient_name, patient_id)
+            result = ""
+            self.store_response("Ερώτηση 4", self.questions["Ερώτηση 4"], q4, metadata, result)
+            self.ask_q5(metadata)
+
         elif q4 == "Όχι" :
-            self.handle_q4_no(q2, q3)
+            if q2 == "Ναι" or q3 == "Ναι":
+                result = "Παραπομπή σε ψυχίατρο"
+                self.store_response("Ερώτηση 4", self.questions["Ερώτηση 4"], q4, metadata, result)
+                st.markdown(f'<p style="color:orange;">{result}</p>', unsafe_allow_html=True)
+            else:
+                result = "Παραπομπή σε ειδικό ψυχικής υγείας"
+                self.store_response("Ερώτηση 4", self.questions["Ερώτηση 4"], q4, metadata, result)
+                st.markdown(f'<p style="color:yellow;">{result}</p>', unsafe_allow_html=True)
 
 
 
-    def ask_q5(self, doctor_name, doctor_id, patient_name, patient_id):
+    def ask_q5(self, metadata):
         st.subheader("Ερώτηση 5: Αυτοκτονικό Πλάνο - Αυτοκτονική Πρόθεση")
         q5 = st.radio(
             "Έχετε σκεφτεί με ποιον τρόπο θα αυτοκτονήσετε;",
@@ -134,15 +153,19 @@ class SurveyHandler():
             index = None,  # Do not preselect any option
         )
 
-        self.store_response("Ερώτηση 5", self.questions["Ερώτηση 5"], q5, doctor_name, doctor_id, patient_name, patient_id)
-
         if q5 == "Ναι":
-            self.ask_q6(doctor_name, doctor_id, patient_name, patient_id)
+            result = ""
+            self.store_response("Ερώτηση 5", self.questions["Ερώτηση 5"], q5, metadata, result)
+            self.ask_q6(metadata)
+
         elif q5 == "Όχι" :
-            st.markdown('<p style="color:orange;">Παραπομπή σε ψυχίατρο και follow-up</p>', unsafe_allow_html=True)
+            result = "Παραπομπή σε ψυχίατρο και follow-up"
+            st.markdown(f'<p style="color:orange;">{result}</p>', unsafe_allow_html=True)
+            self.store_response("Ερώτηση 5", self.questions["Ερώτηση 5"], q5, metadata, result)
 
 
-    def ask_q6(self, doctor_name, doctor_id, patient_name, patient_id):
+
+    def ask_q6(self, metadata):
         st.subheader("Ερώτηση 6: Πρόσβαση στον Τρόπο Αυτοκτονίας")
         q6 = st.radio(
             "Έχετε πρόσβαση στον τρόπο αυτοκτονίας που μου λέτε;",
@@ -150,30 +173,30 @@ class SurveyHandler():
             index = None,  # Do not preselect any option
         )
 
-        self.store_response("Ερώτηση 6", self.questions["Ερώτηση 6"], q6, doctor_name, doctor_id, patient_name, patient_id)
-
+        
         if q6 == "Ναι":
-            st.markdown('<p style="color:red;">Υψηλός Κίνδυνος: Άμεση παραπομπή σε ψυχίατρο / νοσηλεία, αναγκαία η ενημέρωση συγγενών, follow-up.</p>', unsafe_allow_html=True)
+            result = "Υψηλός Κίνδυνος: Άμεση παραπομπή σε ψυχίατρο / νοσηλεία, αναγκαία η ενημέρωση συγγενών, follow-up"
+            self.store_response("Ερώτηση 6", self.questions["Ερώτηση 6"], q6, metadata, result)
+            st.markdown(f'<p style="color:red;">{result}</p>', unsafe_allow_html=True)
+        
         elif q6 == "Όχι" :
-            st.markdown('<p style="color:red;">Άμεση παραπομπή σε ψυχίατρο, follow-up, σύσταση για ενημέρωση συγγενών</p>', unsafe_allow_html=True)
+            result = "Άμεση παραπομπή σε ψυχίατρο, follow-up, σύσταση για ενημέρωση συγγενών"
+            self.store_response("Ερώτηση 6", self.questions["Ερώτηση 6"], q6, metadata, result)
+            st.markdown(f'<p style="color:red;">{result}</p>', unsafe_allow_html=True)
 
 
-    def handle_q4_no(self, q2, q3):
-        if q2 == "Ναι" or q3 == "Ναι":
-            st.markdown('<p style="color:orange;">Παραπομπή σε ψυχίατρο</p>', unsafe_allow_html=True)
-        else:
-            st.markdown('<p style="color:yellow;">Παραπομπή σε ειδικό ψυχικής υγείας</p>', unsafe_allow_html=True)
-
-    def store_response(self, question_idx, question, answer, doctor_name, doctor_id, patient_name, patient_id):
+    def store_response(self, question_idx, question, answer, metadata, result):
         response = {
             "Timestamp": dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            "Doctor Name": doctor_name,
-            "Doctor ID": doctor_id,
-            "Patient Name": patient_name,
-            "Patient ID": patient_id,
-            "Question idx": question_idx,
-            "Question": question,
-            "Answer": answer
+            "Ονοματεπώνυμο Γιατρού": metadata["doctor_name"],
+            #"ΑΦΜ Γιατρού": metadata["doctor_id"],
+            "Ονοματεπώνυμο Ασθενή": metadata["patient_name"],
+            #"ΑΦΜ Ασθενή": metadata["patient_id"],
+            "Ηλικία Ασθενή": metadata["patient_age"],
+            "Ερώτηση (idx)": question_idx,
+            "Ερωτήση": question,
+            "Απάντηση": answer,
+            "Αποτέλεσμα": result
         }
         st.session_state.responses.append(response)
 
@@ -189,9 +212,11 @@ class SurveyHandler():
             # Converting responses to DataFrame
             if 'responses' in st.session_state:
                 df = pd.DataFrame(st.session_state.responses)
+                print(df)
 
                 df = df.sort_values('Timestamp')\
-                    .drop_duplicates('Question', keep='last')
+                    .drop_duplicates('Ερωτήση', keep='last')\
+                    .sort_values('Ερώτηση (idx)')
 
                 # Save to CSV
                 # timestamp = dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S")

@@ -116,17 +116,14 @@ class Controller():
 
         ## _______________ *** Configuration (attributes) *** _______________ #
         # Google Sheets
+        # sheets_reporter_id = st.secrets["google_sheets"]["reporter_id"]
+        # sheets_reporter_tab_survey_results = st.secrets["google_sheets"]["reporter_tab_survey_results"]
         sheets_reporter_id = self.mk1.config.get("google_sheets","reporter_id")
         sheets_reporter_tab_survey_results = self.mk1.config.get("google_sheets","reporter_tab_survey_results")
 
         # Attributes
         today = datetime.now()
         
-        ## _____________________________________________________________________________________________________________________ ##
-        """
-            1. (DataFrame Operations) Initialize logs dictionary
-            2. (Google Sheets API) Appends logs `logs` at Google Sheets
-        """
         ## _____________________________________________________________________________________________________________________ ##
         ## 1. (DataFrame Operations) Initialize logs dictionary
         logs = {
@@ -140,9 +137,7 @@ class Controller():
         response = self.survey_handler.get_survey_result()
 
         ## _____________________________________________________________________________________________________________________ ##
-        ## 2. Log Survey responses to .txt file
-        # todo : take ideas for logs (eg time to complete a question)
-        # logs["avg_num_tokens_raw"]          = emails["num_tokens_raw"].sum() /len(emails)
+        ## 2. Log Survey responses to google sheets
         self.survey_handler.log_survey_result(
             sheets_reporter_id = sheets_reporter_id,
             sheets_reporter_tab_survey_results = sheets_reporter_tab_survey_results
