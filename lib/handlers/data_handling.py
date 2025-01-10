@@ -1,7 +1,7 @@
 # !/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-    [*] Description : Py3 class for MarkI system design for all frameworks
+    [*] Description : Data Handling I/O operations from .txt, google sheets, etc
     [*] Author      : dgeorgiou3@gmail.com
     [*] Date        : Jan, 2024
     [*] Links       :
