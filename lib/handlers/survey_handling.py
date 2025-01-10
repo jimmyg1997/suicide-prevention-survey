@@ -54,16 +54,21 @@ class SurveyHandler():
         # Collecting required information
         doctor_name = st.text_input("Ονοματεπώνυμο Γιατρού", "")
         #doctor_id = st.text_input("ΑΦΜ Γιατρού", "")
+        doctor_clinic = st.selectbox("Κλινική Γιατρού", ["Παθολογική", "Καρδιολογική", "Νεφρολογική", "Γυναικολογική", "Ορθοπαιδική"])
         patient_name = st.text_input("Ονοματεπώνυμο Ασθενή", "")
         #patient_id = st.text_input("ΑΦΜ Ασθενή", "")
         patient_age = st.text_input("Ηλικία Ασθενή", "")
+        patient_arrival = st.selectbox("Προέλευση Ασθενή", ["Τ.Ε.Π.", "Εξωτερικά Ιατρεία"])
+
 
         metadata = {
             "doctor_name" : doctor_name,
             #"doctor_id"   : doctor_id,
             "patient_name" : patient_name,
             #"patient_id" : patient_id,
-            "patient_age" : patient_age
+            "patient_age" : patient_age,
+            "doctor_clinic":doctor_clinic,
+            "patient_arrival":patient_arrival
         }
 
         if not all([doctor_name, patient_name, patient_age]): # doctor_id, patient_id
@@ -76,6 +81,8 @@ class SurveyHandler():
         
         # Start Questionnaire
         self.ask_q1(metadata)
+
+
 
     def ask_q1(self, metadata):
         st.subheader("Ερώτηση 1: Σκέψεις-Ευχές θανάτου")
@@ -190,9 +197,11 @@ class SurveyHandler():
             "Timestamp": dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             "Ονοματεπώνυμο Γιατρού": metadata["doctor_name"],
             #"ΑΦΜ Γιατρού": metadata["doctor_id"],
+            "Κλινική Γιατρού": metadata["doctor_clinic"],
             "Ονοματεπώνυμο Ασθενή": metadata["patient_name"],
             #"ΑΦΜ Ασθενή": metadata["patient_id"],
             "Ηλικία Ασθενή": metadata["patient_age"],
+            "Προέλευση Ασθενή": metadata["patient_arrival"],
             "Ερώτηση (idx)": question_idx,
             "Ερωτήση": question,
             "Απάντηση": answer,

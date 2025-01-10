@@ -7539,3 +7539,53 @@
 2025-01-10 19:00:52 - INFO - (GoogleSheetsAPI.df_to_list) DataFrame converted to list successfully
 2025-01-10 19:00:53 - INFO - Updated range: survey_results!A6:H8, Rows updated: 3
 2025-01-10 19:00:53 - INFO - (DataHandler.append_data_to_google_sheets) Data Appended 
+2025-01-10 19:08:20 - INFO - -------------------------------------- Suicide Prevention Survey (suicide_prevention_survey) Started ..
+2025-01-10 19:08:20 - INFO - (GoogleSheetsAPI.build_client) Service build succeeded
+2025-01-10 19:08:20 - INFO - (GoogleEmailAPI.build_client) Service build succeeded
+2025-01-10 19:08:20 - INFO - (GoogleDriveAPI.build_client) Service build succeeded
+2025-01-10 19:08:20 - INFO - (GoogleDocsAPI.build_client) Service build succeeded
+2025-01-10 19:08:20 - INFO - (Controller.run) All services initilalized
+2025-01-10 19:08:27 - INFO - (GoogleSheetsAPI.build_client) Service build succeeded
+2025-01-10 19:08:27 - INFO - (GoogleEmailAPI.build_client) Service build succeeded
+2025-01-10 19:08:27 - INFO - (GoogleDriveAPI.build_client) Service build succeeded
+2025-01-10 19:08:27 - INFO - (GoogleDocsAPI.build_client) Service build succeeded
+2025-01-10 19:08:27 - INFO - (Controller.run) All services initilalized
+2025-01-10 19:08:31 - INFO - (GoogleSheetsAPI.build_client) Service build succeeded
+2025-01-10 19:08:31 - INFO - (GoogleEmailAPI.build_client) Service build succeeded
+2025-01-10 19:08:31 - INFO - (GoogleDriveAPI.build_client) Service build succeeded
+2025-01-10 19:08:31 - INFO - (GoogleDocsAPI.build_client) Service build succeeded
+2025-01-10 19:08:31 - INFO - (Controller.run) All services initilalized
+2025-01-10 19:08:45 - INFO - -------------------------------------- Suicide Prevention Survey (suicide_prevention_survey) Started ..
+2025-01-10 19:08:45 - INFO - (GoogleSheetsAPI.build_client) Service build succeeded
+2025-01-10 19:08:45 - INFO - (GoogleEmailAPI.build_client) Service build succeeded
+2025-01-10 19:08:45 - INFO - (GoogleDriveAPI.build_client) Service build succeeded
+2025-01-10 19:08:45 - INFO - (GoogleDocsAPI.build_client) Service build succeeded
+2025-01-10 19:08:45 - INFO - (Controller.run) All services initilalized
+2025-01-10 19:08:49 - INFO - (GoogleSheetsAPI.build_client) Service build succeeded
+2025-01-10 19:08:49 - INFO - (GoogleEmailAPI.build_client) Service build succeeded
+2025-01-10 19:08:49 - INFO - (GoogleDriveAPI.build_client) Service build succeeded
+2025-01-10 19:08:49 - INFO - (GoogleDocsAPI.build_client) Service build succeeded
+2025-01-10 19:08:49 - INFO - (Controller.run) All services initilalized
+2025-01-10 19:08:51 - INFO - (GoogleSheetsAPI.build_client) Service build succeeded
+2025-01-10 19:08:51 - INFO - (GoogleEmailAPI.build_client) Service build succeeded
+2025-01-10 19:08:51 - INFO - (GoogleDriveAPI.build_client) Service build succeeded
+2025-01-10 19:08:51 - INFO - (GoogleDocsAPI.build_client) Service build succeeded
+2025-01-10 19:08:51 - INFO - (Controller.run) All services initilalized
+2025-01-10 19:08:53 - INFO - (GoogleSheetsAPI.build_client) Service build succeeded
+2025-01-10 19:08:53 - INFO - (GoogleEmailAPI.build_client) Service build succeeded
+2025-01-10 19:08:53 - INFO - (GoogleDriveAPI.build_client) Service build succeeded
+2025-01-10 19:08:53 - INFO - (GoogleDocsAPI.build_client) Service build succeeded
+2025-01-10 19:08:53 - INFO - (Controller.run) All services initilalized
+2025-01-10 19:08:55 - INFO - (GoogleSheetsAPI.build_client) Service build succeeded
+2025-01-10 19:08:55 - INFO - (GoogleEmailAPI.build_client) Service build succeeded
+2025-01-10 19:08:55 - INFO - (GoogleDriveAPI.build_client) Service build succeeded
+2025-01-10 19:08:55 - INFO - (GoogleDocsAPI.build_client) Service build succeeded
+2025-01-10 19:08:55 - INFO - (Controller.run) All services initilalized
+2025-01-10 19:08:56 - INFO - (GoogleSheetsAPI.build_client) Service build succeeded
+2025-01-10 19:08:56 - INFO - (GoogleEmailAPI.build_client) Service build succeeded
+2025-01-10 19:08:56 - INFO - (GoogleDriveAPI.build_client) Service build succeeded
+2025-01-10 19:08:56 - INFO - (GoogleDocsAPI.build_client) Service build succeeded
+2025-01-10 19:08:56 - INFO - (Controller.run) All services initilalized
+2025-01-10 19:08:56 - INFO - (GoogleSheetsAPI.df_to_list) DataFrame converted to list successfully
+2025-01-10 19:08:57 - INFO - Updated range: survey_results!A9:J9, Rows updated: 1
+2025-01-10 19:08:57 - INFO - (DataHandler.append_data_to_google_sheets) Data Appended 
