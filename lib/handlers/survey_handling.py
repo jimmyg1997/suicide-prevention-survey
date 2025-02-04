@@ -15,6 +15,8 @@ import numpy    as np
 import pandas   as pd
 import datetime as dt
 import streamlit as st
+import streamlit.components.v1 as components
+
 from retry                  import retry
 from tqdm                   import tqdm
 from dateutil.relativedelta import relativedelta
@@ -185,6 +187,39 @@ class SurveyHandler():
             result = "Υψηλός Κίνδυνος: Άμεση παραπομπή σε ψυχίατρο / νοσηλεία, αναγκαία η ενημέρωση συγγενών, follow-up"
             self.store_response("Ερώτηση 6", self.questions["Ερώτηση 6"], q6, metadata, result)
             st.markdown(f'<p style="color:red;">{result}</p>', unsafe_allow_html=True)
+
+            # Alternative approach 1
+            # alert = """<script>
+            #         setTimeout(function(){
+            #             alert("Υψηλός Κίνδυνος! Επείγουσα Αντίδραση Απαιτείται!");
+            #         }, 1000);  // Delay to trigger after 1 second
+            #     </script>
+            # """
+            # alert_with_image = """
+            #     <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            #                 background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); z-index: 9999;">
+            #         <h2>⚠️ Υψηλός Κίνδυνος</h2>
+            #         <img src="https://i.postimg.cc/hvYywVzB/2.png" alt="High Risk Image" style="width: 200px; height: 200px; display: block; margin: 10px auto;">
+            #         <p>Υψηλός Κίνδυνος! Επείγουσα Αντίδραση Απαιτείται!</p>
+            #     </div>
+            #     <script>
+            #         setTimeout(function(){
+            #             alert("Υψηλός Κίνδυνος! Επείγουσα Αντίδραση Απαιτείται!");
+            #         }, 1000);  // Delay to trigger after 1 second
+            #     </script>
+            # """
+            # components.html(
+            #     alert, 
+            #     height=0, width=0
+            # )
+
+            # HTML and JS to create a real popup
+            # st.markdown(alert, unsafe_allow_html=True)
+            st.image("https://i.postimg.cc/hvYywVzB/2.png")
+
+            # with st.expander("Υψηλός Κίνδυνος!", expanded=True):
+            #     st.image("https://i.postimg.cc/hvYywVzB/2.png")
+            #     st.warning("Υψηλός Κίνδυνος... Επείγουσα Αντίδραση Απαιτείται!")
         
         elif q6 == "Όχι" :
             result = "Άμεση παραπομπή σε ψυχίατρο, follow-up, σύσταση για ενημέρωση συγγενών"
@@ -245,8 +280,6 @@ class SurveyHandler():
                     spreadsheet_id         = sheets_reporter_id,
                     spreadsheet_range_name = sheets_reporter_tab_survey_results,
                 )
-
-
 
                 return df
             else:
