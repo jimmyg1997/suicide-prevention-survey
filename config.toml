@@ -1,3 +1,4 @@
 [server]
 disableWebSocket = true
 enableWebsocketCompression = false
+enableStaticServing = true

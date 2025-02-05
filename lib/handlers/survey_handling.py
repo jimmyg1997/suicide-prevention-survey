@@ -10,7 +10,7 @@
 # -*-*-*-*-*-*-*-*-*-*-* #
 #     Basic Modules      #
 # -*-*-*-*-*-*-*-*-*-*-* #
-import os, json
+import os, json, base64
 import numpy    as np
 import pandas   as pd
 import datetime as dt
@@ -50,6 +50,46 @@ class SurveyHandler():
             "Ερώτηση 6" : "[Πρόσβαση στον Τρόπο Αυτοκτονίας] Έχετε πρόσβαση στον τρόπο αυτοκτονίας που μου λέτε;"
         }
 
+         
+    def get_base64_of_bin_file(self, bin_file):
+        """
+        function to read png file 
+        ----------
+        bin_file: png -> the background image in local folder
+        """
+        with open(bin_file, 'rb') as f:
+            data = f.read()
+        return base64.b64encode(data).decode()
+
+    def set_background(self, image_path):
+        """
+        function to display png as bg
+            image_path: png -> the background image in local folder
+        """
+        bin_str = self.get_base64_of_bin_file(image_path)
+        page_bg_img = '''
+        <style>
+        st.App {
+        background-image: url("data:image/png;base64,%s");
+        background-size: cover;
+        }
+        </style>
+        ''' % bin_str
+        
+        st.markdown(page_bg_img, unsafe_allow_html=True)
+
+    # def set_background(self, image_path):
+    #     """ Sets a background image with reduced transparency in Streamlit."""
+    #     background_style = """
+    #     <style>
+    #     body {
+    #         background-image: url("https://postimg.cc/HcSZYW2Y");
+    #         background-size: cover;
+    #     }
+    #     </style>
+    #     """
+    #     st.markdown(background_style, unsafe_allow_html=True)
+
     def get_survey_result(self):
         st.title("Ερωτηματολόγιο Αξιολόγησης Αυτοκτονικού Κινδύνου")
         
@@ -58,6 +98,8 @@ class SurveyHandler():
 
         # Left column: Metadata
         with left_column:
+            st.image("https://www.imghippo.com/i/UrFr3600eG.jpg") #, use_container_width=True)
+            st.markdown('<style><img src="https://i.imghippo.com/files/UrFr3600eG.jpg</style>" alt="" border="0">')
             doctor_name = st.text_input("Ονοματεπώνυμο Γιατρού", "")
             doctor_clinic = st.selectbox("Κλινική Γιατρού", ["Παθολογική", "Καρδιολογική", "Νεφρολογική", "Γυναικολογική", "Ορθοπαιδική"])
             patient_name = st.text_input("Ονοματεπώνυμο Ασθενή", "")

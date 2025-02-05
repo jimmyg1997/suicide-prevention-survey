@@ -121,8 +121,18 @@ class Controller():
         sheets_reporter_id = self.mk1.config.get("google_sheets","reporter_id")
         sheets_reporter_tab_survey_results = self.mk1.config.get("google_sheets","reporter_tab_survey_results")
 
+        # App Static
+        img_path_background = self.mk1.config.get("app_static","img_path_background")
+
+
         # Attributes
         today = datetime.now()
+
+        ## _____________________________________________________________________________________________________________________ ##
+        ## 1. Set background
+        self.survey_handler.set_background(
+            image_path = img_path_background
+        )
         
         ## _____________________________________________________________________________________________________________________ ##
         ## 1. (DataFrame Operations) Initialize logs dictionary
