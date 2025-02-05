@@ -52,42 +52,42 @@ class SurveyHandler():
 
     def get_survey_result(self):
         st.title("Ερωτηματολόγιο Αξιολόγησης Αυτοκτονικού Κινδύνου")
-
-        # Collecting required information
-        doctor_name = st.text_input("Ονοματεπώνυμο Γιατρού", "")
-        #doctor_id = st.text_input("ΑΦΜ Γιατρού", "")
-        doctor_clinic = st.selectbox("Κλινική Γιατρού", ["Παθολογική", "Καρδιολογική", "Νεφρολογική", "Γυναικολογική", "Ορθοπαιδική"])
-        patient_name = st.text_input("Ονοματεπώνυμο Ασθενή", "")
-        #patient_id = st.text_input("ΑΦΜ Ασθενή", "")
-        patient_age = st.text_input("Ηλικία Ασθενή", "")
-        patient_arrival = st.selectbox("Προέλευση Ασθενή", ["Τ.Ε.Π.", "Εξωτερικά Ιατρεία"])
-
-
-        metadata = {
-            "doctor_name" : doctor_name,
-            #"doctor_id"   : doctor_id,
-            "patient_name" : patient_name,
-            #"patient_id" : patient_id,
-            "patient_age" : patient_age,
-            "doctor_clinic":doctor_clinic,
-            "patient_arrival":patient_arrival
-        }
-
-        if not all([doctor_name, patient_name, patient_age]): # doctor_id, patient_id
-            st.error("All fields are required to proceed.")
-            return
-
-        # Initialize session state to track responses
-        if 'responses' not in st.session_state:
-            st.session_state.responses = []
         
-        # Start Questionnaire
-        self.ask_q1(metadata)
+        # Create two columns
+        left_column, right_column = st.columns([1, 2])  # Adjust the ratio of column width
+
+        # Left column: Metadata
+        with left_column:
+            doctor_name = st.text_input("Ονοματεπώνυμο Γιατρού", "")
+            doctor_clinic = st.selectbox("Κλινική Γιατρού", ["Παθολογική", "Καρδιολογική", "Νεφρολογική", "Γυναικολογική", "Ορθοπαιδική"])
+            patient_name = st.text_input("Ονοματεπώνυμο Ασθενή", "")
+            patient_age = st.text_input("Ηλικία Ασθενή", "")
+            patient_arrival = st.selectbox("Προέλευση Ασθενή", ["Τ.Ε.Π.", "Εξωτερικά Ιατρεία"])
+
+            metadata = {
+                "doctor_name" : doctor_name,
+                "patient_name" : patient_name,
+                "patient_age" : patient_age,
+                "doctor_clinic": doctor_clinic,
+                "patient_arrival": patient_arrival
+            }
+
+        # Right column: Questions
+        with right_column:
+            # Initialize session state to track responses
+            if 'responses' not in st.session_state:
+                st.session_state.responses = []
+            
+            # Start Questionnaire
+            self.ask_q1(metadata)
 
 
 
     def ask_q1(self, metadata):
-        st.subheader("Ερώτηση 1: Σκέψεις-Ευχές θανάτου")
+        st.markdown("*Το πολύ 6 ερωτήσεις και θα χρειαστείς το πολύ 40 δευτερόλεπτα για να τις απαντήσεις*.")
+        #st.markdown("*Το πολύ 6 ερωτήσεις και θα χρειαστείς το πολύ 40 δευτερόλεπτα για να τις απαντήσεις*.")
+        st.markdown("<h4 style='font-size: 20px;'>Ερώτηση 1: Σκέψεις-Ευχές θανάτου</h4>", unsafe_allow_html=True)
+        #st.subheader("Ερώτηση 1: Σκέψεις-Ευχές θανάτου")
         q1 = st.radio(
             "Είχατε τον τελευταίο μήνα σκέψεις ότι δεν αξίζει η ζωή, ότι δεν θέλετε να ζείτε, ή όταν πάτε για ύπνο σκέπτεστε ότι θα ήταν καλύτερα να μην ξυπνήσετε;", 
             options = ["Ναι", "Όχι"],
@@ -106,7 +106,8 @@ class SurveyHandler():
 
 
     def ask_q2(self, metadata):
-        st.subheader("Ερώτηση 2: Ιστορικό Αποπειρών Αυτοκτονίας")
+        st.markdown("<h4 style='font-size: 20px;'>Ερώτηση 2: Ιστορικό Αποπειρών Αυτοκτονίας</h4>", unsafe_allow_html=True)
+
         q2 = st.radio(
             "Έχετε κάνει ποτέ κάποια απόπειρα αυτοκτονίας;",
             options = ["Ναι", "Όχι"],
@@ -118,7 +119,7 @@ class SurveyHandler():
 
 
     def ask_q3(self, metadata, q2):
-        st.subheader("Ερώτηση 3: Κληρονομικότητα")
+        st.markdown("<h4 style='font-size: 20px;'>Ερώτηση 3: Κληρονομικότητα</h4>", unsafe_allow_html=True)
         q3 = st.radio(
             "Υπάρχει κάποιο άτομο στο οικογενειακό σας περιβάλλον που έχει αυτοκτονήσει ή που έχει κάνει απόπειρα αυτοκτονίας;",
             options = ["Ναι", "Όχι"],
@@ -130,7 +131,7 @@ class SurveyHandler():
 
 
     def ask_q4(self, metadata, q2, q3):
-        st.subheader("Ερώτηση 4: Αυτοκτονικές Σκέψεις στο Παρόν")
+        st.markdown("<h4 style='font-size: 20px;'>Ερώτηση 4: Αυτοκτονικές Σκέψεις στο Παρόν</h4>", unsafe_allow_html=True)
         q4 = st.radio(
             "Είχατε τον τελευταίο μήνα σκέψεις να αυτοκτονήσετε / να βλάψετε τον εαυτό σας;",
             options = ["Ναι", "Όχι"],
@@ -155,7 +156,7 @@ class SurveyHandler():
 
 
     def ask_q5(self, metadata):
-        st.subheader("Ερώτηση 5: Αυτοκτονικό Πλάνο - Αυτοκτονική Πρόθεση")
+        st.markdown("<h4 style='font-size: 20px;'>Ερώτηση 5: Αυτοκτονικό Πλάνο - Αυτοκτονική Πρόθεση</h4>", unsafe_allow_html=True)
         q5 = st.radio(
             "Έχετε σκεφτεί με ποιον τρόπο θα αυτοκτονήσετε;",
             options = ["Ναι", "Όχι"],
@@ -175,14 +176,13 @@ class SurveyHandler():
 
 
     def ask_q6(self, metadata):
-        st.subheader("Ερώτηση 6: Πρόσβαση στον Τρόπο Αυτοκτονίας")
+        st.markdown("<h4 style='font-size: 20px;'>Ερώτηση 6: Πρόσβαση στον Τρόπο Αυτοκτονίας</h4>", unsafe_allow_html=True)
         q6 = st.radio(
             "Έχετε πρόσβαση στον τρόπο αυτοκτονίας που μου λέτε;",
             options = ["Ναι", "Όχι"],
             index = None,  # Do not preselect any option
         )
 
-        
         if q6 == "Ναι":
             result = "Υψηλός Κίνδυνος: Άμεση παραπομπή σε ψυχίατρο / νοσηλεία, αναγκαία η ενημέρωση συγγενών, follow-up"
             self.store_response("Ερώτηση 6", self.questions["Ερώτηση 6"], q6, metadata, result)
@@ -251,37 +251,41 @@ class SurveyHandler():
             sheets_reporter_id                 : str, 
             sheets_reporter_tab_survey_results : str
         ):
-         # Log results with timestamp
-        if st.button("Submit Response"):
-            # Converting responses to DataFrame
-            if 'responses' in st.session_state:
-                df = pd.DataFrame(st.session_state.responses)
-                print(df)
+        # Create two columns
+        left_column, right_column = st.columns([1, 2])  # Adjust the ratio of column width
 
-                df = df.sort_values('Timestamp')\
-                    .drop_duplicates('Ερωτήση', keep='last')\
-                    .sort_values('Ερώτηση (idx)')
+        with right_column :
+            # Log results with timestamp
+            if st.button("Submit Response"):
+                # Converting responses to DataFrame
+                if 'responses' in st.session_state:
+                    df = pd.DataFrame(st.session_state.responses)
+                    print(df)
 
-                # Save to CSV
-                # timestamp = dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                # df.to_csv(
-                #     path_or_buf = f"storage/responses_{timestamp}.csv", 
-                #     mode        = "a", 
-                #     header      = False, 
-                #     index       = False
-                # )
-                st.success("Response submitted successfully!")
-                st.dataframe(df)
+                    df = df.sort_values('Timestamp')\
+                        .drop_duplicates('Ερωτήση', keep='last')\
+                        .sort_values('Ερώτηση (idx)')
+
+                    # Save to CSV
+                    # timestamp = dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                    # df.to_csv(
+                    #     path_or_buf = f"storage/responses_{timestamp}.csv", 
+                    #     mode        = "a", 
+                    #     header      = False, 
+                    #     index       = False
+                    # )
+                    st.success("Response submitted successfully!")
+                    st.dataframe(df)
 
 
-                # Save to Google Sheets
-                self.data_loader.append_data_to_google_sheets(
-                    df                     = df,
-                    spreadsheet_id         = sheets_reporter_id,
-                    spreadsheet_range_name = sheets_reporter_tab_survey_results,
-                )
+                    # Save to Google Sheets
+                    self.data_loader.append_data_to_google_sheets(
+                        df                     = df,
+                        spreadsheet_id         = sheets_reporter_id,
+                        spreadsheet_range_name = sheets_reporter_tab_survey_results,
+                    )
 
-                return df
-            else:
-                st.warning("No responses available to create the dataframe.")
-                return None
+                    return df
+                else:
+                    st.warning("No responses available to create the dataframe.")
+                    return None
