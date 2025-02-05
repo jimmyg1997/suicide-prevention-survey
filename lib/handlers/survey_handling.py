@@ -62,12 +62,14 @@ class SurveyHandler():
             doctor_clinic = st.selectbox("Κλινική Γιατρού", ["Παθολογική", "Καρδιολογική", "Νεφρολογική", "Γυναικολογική", "Ορθοπαιδική"])
             patient_name = st.text_input("Ονοματεπώνυμο Ασθενή", "")
             patient_age = st.text_input("Ηλικία Ασθενή", "")
+            patient_vat = st.text_input("AMKA Ασθενή", "")
             patient_arrival = st.selectbox("Προέλευση Ασθενή", ["Τ.Ε.Π.", "Εξωτερικά Ιατρεία"])
 
             metadata = {
                 "doctor_name" : doctor_name,
                 "patient_name" : patient_name,
                 "patient_age" : patient_age,
+                "patient_vat" : patient_vat,
                 "doctor_clinic": doctor_clinic,
                 "patient_arrival": patient_arrival
             }
@@ -84,7 +86,7 @@ class SurveyHandler():
 
 
     def ask_q1(self, metadata):
-        st.markdown("*Το πολύ 6 ερωτήσεις και θα χρειαστείς το πολύ 40 δευτερόλεπτα για να τις απαντήσεις*.")
+        st.markdown("1-6 ερωτήσεις, < 1 λεπτό συμπλήρωσης")
         #st.markdown("*Το πολύ 6 ερωτήσεις και θα χρειαστείς το πολύ 40 δευτερόλεπτα για να τις απαντήσεις*.")
         st.markdown("<h4 style='font-size: 20px;'>Ερώτηση 1: Σκέψεις-Ευχές θανάτου</h4>", unsafe_allow_html=True)
         #st.subheader("Ερώτηση 1: Σκέψεις-Ευχές θανάτου")
@@ -234,7 +236,7 @@ class SurveyHandler():
             #"ΑΦΜ Γιατρού": metadata["doctor_id"],
             "Κλινική Γιατρού": metadata["doctor_clinic"],
             "Ονοματεπώνυμο Ασθενή": metadata["patient_name"],
-            #"ΑΦΜ Ασθενή": metadata["patient_id"],
+            "ΑΜΚΑ Ασθενή": metadata["patient_vat"],
             "Ηλικία Ασθενή": metadata["patient_age"],
             "Προέλευση Ασθενή": metadata["patient_arrival"],
             "Ερώτηση (idx)": question_idx,
