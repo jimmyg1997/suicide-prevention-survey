@@ -66,7 +66,7 @@ class SurveyHandler():
             .stApp {{
                 background: linear-gradient(rgba(255,255,255, {1-opacity}), rgba(255,255,255, {1-opacity})), 
                             url("{image_path}") no-repeat center center fixed;
-                background-size: 80%;
+                background-size: cover;
             }}
             </style>
             """,
@@ -138,7 +138,7 @@ class SurveyHandler():
                 "patient_age"     : patient_age,
                 "patient_gender"  : patient_gender,
                 "patient_vat"     : patient_vat,
-                "patient_arrival" : patient_arrival
+                "patient_arrival" : patient_arrival,
                 "survey_reason"   : survey_reason
             }
 
@@ -146,8 +146,8 @@ class SurveyHandler():
 
         # Right column: Questions
         with right_column:
-            # image_path = "https://raw.githubusercontent.com/jimmyg1997/suicide-prevention-survey/main/static/7.png"
-            # opacity = 0.6
+            # image_path = "https://raw.githubusercontent.com/jimmyg1997/suicide-prevention-survey/main/static/14.png"
+            # opacity = 0.9
             # st.markdown(
             #     f"""
             #     <style>
@@ -331,6 +331,7 @@ class SurveyHandler():
             "Γένος Ασθενή": metadata["patient_gender"],
             "ΑΜΚΑ Ασθενή": metadata["patient_vat"],
             "Προέλευση Ασθενή": metadata["patient_arrival"],
+            "Λόγος συμπλήρωσης ερωτηματολογίου": metadata["survey_reason"],
             "Ερώτηση (idx)": question_idx,
             "Ερωτήση": question,
             "Απάντηση": answer,
