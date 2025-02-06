@@ -50,6 +50,30 @@ class SurveyHandler():
             "Ερώτηση 6" : "[Πρόσβαση στον Τρόπο Αυτοκτονίας] Έχετε πρόσβαση στον τρόπο αυτοκτονίας που μου λέτε;"
         }
 
+        self.clinics = [
+            "Αιματολογική",
+            "Παθολογική",
+            "Καρδιολογική",
+            "Νεφρολογίας & Μεταμόσχευσης Νεφρού",
+            "Μονάδα Εντατικής Θεραπείας",
+            "Μονάδα Ειδικών Λοιμώξεων",
+            "Αλλεργιολογικό Τμήμα",
+            "Νευρολογικό Τμήμα",
+            "Πνευμονολογικό Τμήμα",
+            "Γαστρεντερολογική Κλινική",
+            "Χειρουργική",
+            "Αγγειοχειρουργική",
+            "Γυναικολογική",
+            "Οφθαλμολογική",
+            "Ορθοπαιδική",
+            "Ουρολογική",
+            "Ωτορινολαρυγγολογική",
+            "Μονάδα Μεταμόσχευσης",
+            "Αναισθησιολογικό",
+            "Οδοντιατρικό",
+            "Άλλη"
+        ]
+
 
 
     def set_background(self, image_path: str, opacity: float = 0.1):
@@ -102,6 +126,25 @@ class SurveyHandler():
 
         st.markdown(
             """
+            <style>
+            /* Set the title to be responsive */
+            h1 {
+                font-size: 2.5rem;  /* Default font size for large screens */
+            }
+
+            /* Adjust the font size for mobile screens */
+            @media (max-width: 768px) {
+                h1 {
+                    font-size: 1.0rem;  /* Smaller font size for mobile */
+                }
+            }
+            </style>
+            """,
+            unsafe_allow_html=True
+        )
+
+        st.markdown(
+            """
             <h1 style="display: flex; align-items: center;">
             Ερωτηματολόγιο Αξιολόγησης Αυτοκτονικού Κινδύνου Ασθενή
                 <img src="https://raw.githubusercontent.com/jimmyg1997/suicide-prevention-survey/main/static/2.png" 
@@ -111,7 +154,8 @@ class SurveyHandler():
             """,
             unsafe_allow_html=True
         )
-        
+
+           
         # Create two columns
         left_column, right_column = st.columns([1, 3])  # Adjust the ratio of column width
 
@@ -123,7 +167,7 @@ class SurveyHandler():
             st.markdown("*Όλα τα πεδία είναι προαιρετικά*")
             #st.markdown('<style><img src="https://drive.google.com/uc?id=1FSh-igr3BGwh71kRr-nNQBB-KvHfDPbt"</style> alt="" border="0">')
             #doctor_name = st.text_input("Ονοματεπώνυμο Γιατρού", "")
-            clinic = st.selectbox("Κλινική", ["Παθολογική", "Καρδιολογική", "Νεφρολογική", "Γυναικολογική", "Ορθοπαιδική"])
+            clinic = st.selectbox("Κλινική", self.clinics)
             #patient_name = st.text_input("Ονοματεπώνυμο Ασθενή", "")
             patient_age = st.text_input("Ηλικία Ασθενή", "")
             patient_gender = st.selectbox("Γένος", ["ΑΡΡΕΝ", "ΘΗΛΥ"])
@@ -308,7 +352,7 @@ class SurveyHandler():
 
             # HTML and JS to create a real popup
             # st.markdown(alert, unsafe_allow_html=True)
-            st.image("https://i.postimg.cc/hvYywVzB/2.png")
+            st.image("https://i.postimg.cc/hvYywVzB/2.png", width=100)
 
             # with st.expander("Υψηλός Κίνδυνος!", expanded=True):
             #     st.image("https://i.postimg.cc/hvYywVzB/2.png")
