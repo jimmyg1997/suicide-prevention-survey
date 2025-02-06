@@ -51,44 +51,90 @@ class SurveyHandler():
         }
 
          
-    def get_base64_of_bin_file(self, bin_file):
-        """
-        function to read png file 
-        ----------
-        bin_file: png -> the background image in local folder
-        """
-        with open(bin_file, 'rb') as f:
-            data = f.read()
-        return base64.b64encode(data).decode()
+    # def get_base64_of_bin_file(self, bin_file):
+    #     """
+    #     function to read png file 
+    #     ----------
+    #     bin_file: png -> the background image in local folder
+    #     """
+    #     with open(bin_file, 'rb') as f:
+    #         data = f.read()
+    #     return base64.b64encode(data).decode()
 
-    def set_background(self, image_path):
-        """
-        function to display png as bg
-            image_path: png -> the background image in local folder
-        """
-        bin_str = self.get_base64_of_bin_file(image_path)
-        page_bg_img = '''
-        <style>
-        st.App {
-        background-image: url("data:image/png;base64,%s");
-        background-size: cover;
-        }
-        </style>
-        ''' % bin_str
+    # def set_background(self, image_path):
+    #     """
+    #     function to display png as bg
+    #         image_path: png -> the background image in local folder
+    #     """
+    #     bin_str = self.get_base64_of_bin_file(image_path)
+    #     page_bg_img = '''
+    #     <style>
+    #     st.App {
+    #     background-image: url("data:image/png;base64,%s");
+    #     background-size: cover;
+    #     }
+    #     </style>
+    #     ''' % bin_str
         
-        st.markdown(page_bg_img, unsafe_allow_html=True)
+    #     st.markdown(page_bg_img, unsafe_allow_html=True)
 
     # def set_background(self, image_path):
     #     """ Sets a background image with reduced transparency in Streamlit."""
-    #     background_style = """
+    #     background_style = f"""
     #     <style>
     #     body {
-    #         background-image: url("https://postimg.cc/HcSZYW2Y");
+    #         background-image: url('{image_path}');
     #         background-size: cover;
     #     }
     #     </style>
     #     """
     #     st.markdown(background_style, unsafe_allow_html=True)
+
+
+    def set_background(self, image_path: str, opacity: float = 0.1):
+        """
+        Sets a background image in a Streamlit app with reduced opacity.
+
+        Parameters:
+        - image_url (str): Direct URL to the background image (GitHub raw link).
+        - opacity (float): Opacity level (0.0 to 1.0, where 1 is fully visible and 0 is fully transparent).
+        """
+        st.markdown(
+            f"""
+            <style>
+            .stApp {{
+                background: linear-gradient(rgba(255,255,255, {1-opacity}), rgba(255,255,255, {1-opacity})), 
+                            url("{image_path}") no-repeat center center fixed;
+                background-size: cover;
+            }}
+            </style>
+            """,
+            unsafe_allow_html=True
+        )
+
+
+    def set_backgroundv2(self, image_path: str, opacity: float = 0.5):
+        """
+        Sets a background image in the main content area of a Streamlit app with reduced opacity.
+
+        Parameters:
+        - image_url (str): Direct URL to the background image.
+        - opacity (float): Opacity level (0.0 to 1.0, where 1 is fully visible and 0 is fully transparent).
+        """
+        st.markdown(
+            f"""
+            <style>
+            .block-container {{
+                background: linear-gradient(rgba(255,255,255, {1-opacity}), rgba(255,255,255, {1-opacity})), 
+                            url("{image_path}") no-repeat center center;
+                background-size: cover;
+                padding: 20px;
+                border-radius: 15px;
+            }}
+            </style>
+            """,
+            unsafe_allow_html=True
+        )
 
     def get_survey_result(self):
         st.title("Ερωτηματολόγιο Αξιολόγησης Αυτοκτονικού Κινδύνου")
@@ -97,23 +143,25 @@ class SurveyHandler():
         left_column, right_column = st.columns([1, 2])  # Adjust the ratio of column width
 
         # Left column: Metadata
+        #st.image("https://drive.google.com/uc?id=1FSh-igr3BGwh71kRr-nNQBB-KvHfDPbt") #, use_container_width=True)
+
         with left_column:
-            st.image("https://www.imghippo.com/i/UrFr3600eG.jpg") #, use_container_width=True)
-            st.markdown('<style><img src="https://i.imghippo.com/files/UrFr3600eG.jpg</style>" alt="" border="0">')
+            st.image("https://raw.githubusercontent.com/jimmyg1997/suicide-prevention-survey/main/static/1.png", use_container_width=True)
+            #st.markdown('<style><img src="https://drive.google.com/uc?id=1FSh-igr3BGwh71kRr-nNQBB-KvHfDPbt"</style> alt="" border="0">')
             doctor_name = st.text_input("Ονοματεπώνυμο Γιατρού", "")
-            doctor_clinic = st.selectbox("Κλινική Γιατρού", ["Παθολογική", "Καρδιολογική", "Νεφρολογική", "Γυναικολογική", "Ορθοπαιδική"])
+            clinic = st.selectbox("Κλινική", ["Παθολογική", "Καρδιολογική", "Νεφρολογική", "Γυναικολογική", "Ορθοπαιδική"])
             patient_name = st.text_input("Ονοματεπώνυμο Ασθενή", "")
             patient_age = st.text_input("Ηλικία Ασθενή", "")
             patient_vat = st.text_input("AMKA Ασθενή", "")
             patient_arrival = st.selectbox("Προέλευση Ασθενή", ["Τ.Ε.Π.", "Εξωτερικά Ιατρεία"])
 
             metadata = {
-                "doctor_name" : doctor_name,
-                "patient_name" : patient_name,
-                "patient_age" : patient_age,
-                "patient_vat" : patient_vat,
-                "doctor_clinic": doctor_clinic,
-                "patient_arrival": patient_arrival
+                "doctor_name"     : doctor_name,
+                "clinic"          : clinic,
+                "patient_name"    : patient_name,
+                "patient_age"     : patient_age,
+                "patient_vat"     : patient_vat,
+                "patient_arrival" : patient_arrival
             }
 
         # Right column: Questions
@@ -276,7 +324,7 @@ class SurveyHandler():
             "Timestamp": dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             "Ονοματεπώνυμο Γιατρού": metadata["doctor_name"],
             #"ΑΦΜ Γιατρού": metadata["doctor_id"],
-            "Κλινική Γιατρού": metadata["doctor_clinic"],
+            "Κλινική": metadata["clinic"],
             "Ονοματεπώνυμο Ασθενή": metadata["patient_name"],
             "ΑΜΚΑ Ασθενή": metadata["patient_vat"],
             "Ηλικία Ασθενή": metadata["patient_age"],
