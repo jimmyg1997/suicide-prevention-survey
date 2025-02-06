@@ -51,8 +51,8 @@ class SurveyHandler():
         }
 
         self.clinics = [
-            "Αιματολογική",
             "Παθολογική",
+            "Αιματολογική",
             "Καρδιολογική",
             "Νεφρολογίας & Μεταμόσχευσης Νεφρού",
             "Μονάδα Εντατικής Θεραπείας",
@@ -135,7 +135,7 @@ class SurveyHandler():
             /* Adjust the font size for mobile screens */
             @media (max-width: 768px) {
                 h1 {
-                    font-size: 20px;  /* Smaller font size for mobile */
+                    font-size: 10px;  /* Smaller font size for mobile */
                 }
             }
             </style>
