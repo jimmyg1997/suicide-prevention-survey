@@ -113,7 +113,7 @@ class SurveyHandler():
         )
 
 
-    def set_backgroundv2(self, image_path: str, opacity: float = 0.5):
+    def set_background_v2(self, image_path: str, opacity: float = 0.5):
         """
         Sets a background image in the main content area of a Streamlit app with reduced opacity.
 
@@ -146,7 +146,7 @@ class SurveyHandler():
         #st.image("https://drive.google.com/uc?id=1FSh-igr3BGwh71kRr-nNQBB-KvHfDPbt") #, use_container_width=True)
 
         with left_column:
-            st.image("https://raw.githubusercontent.com/jimmyg1997/suicide-prevention-survey/main/static/3.png", use_container_width=True)
+            st.image("https://raw.githubusercontent.com/jimmyg1997/suicide-prevention-survey/main/static/8.png", use_container_width=True)
             #st.markdown('<style><img src="https://drive.google.com/uc?id=1FSh-igr3BGwh71kRr-nNQBB-KvHfDPbt"</style> alt="" border="0">')
             doctor_name = st.text_input("Ονοματεπώνυμο Γιατρού", "")
             clinic = st.selectbox("Κλινική", ["Παθολογική", "Καρδιολογική", "Νεφρολογική", "Γυναικολογική", "Ορθοπαιδική"])
@@ -154,6 +154,8 @@ class SurveyHandler():
             patient_age = st.text_input("Ηλικία Ασθενή", "")
             patient_vat = st.text_input("AMKA Ασθενή", "")
             patient_arrival = st.selectbox("Προέλευση Ασθενή", ["Τ.Ε.Π.", "Εξωτερικά Ιατρεία"])
+
+            st.image("https://raw.githubusercontent.com/jimmyg1997/suicide-prevention-survey/main/static/9.png", use_container_width=True)
 
             metadata = {
                 "doctor_name"     : doctor_name,
@@ -166,6 +168,15 @@ class SurveyHandler():
 
         # Right column: Questions
         with right_column:
+            # st.markdown(
+            #     """
+            #     <div style="display: flex; justify-content: center;">
+            #         <img src="https://raw.githubusercontent.com/jimmyg1997/suicide-prevention-survey/main/static/3.png" width="250">
+            #     </div>
+            #     """,
+            #     unsafe_allow_html=True
+            # )
+            #st.image("https://raw.githubusercontent.com/jimmyg1997/suicide-prevention-survey/main/static/3.png", width=250) #use_container_width=True)
             #st.image("https://raw.githubusercontent.com/jimmyg1997/suicide-prevention-survey/main/static/4.png", use_container_width=True)
 
             # Initialize session state to track responses

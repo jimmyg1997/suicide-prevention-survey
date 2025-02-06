@@ -45,7 +45,7 @@ bs4
 
 ## ========================== Basic Modules for APIs
 # langid
-streamlit
+streamlit==1.41.0
 watchdog
 
 ## ========================== Basic Modules for Machine Learning
