@@ -137,16 +137,16 @@ class SurveyHandler():
         )
 
     def get_survey_result(self):
-        st.title("Ερωτηματολόγιο Αξιολόγησης Αυτοκτονικού Κινδύνου")
+        st.title("Ερωτηματολόγιο Αξιολόγησης Αυτοκτονικού Κινδύνου Ασθενή")
         
         # Create two columns
-        left_column, right_column = st.columns([1, 2])  # Adjust the ratio of column width
+        left_column, right_column = st.columns([1, 3])  # Adjust the ratio of column width
 
         # Left column: Metadata
         #st.image("https://drive.google.com/uc?id=1FSh-igr3BGwh71kRr-nNQBB-KvHfDPbt") #, use_container_width=True)
 
         with left_column:
-            st.image("https://raw.githubusercontent.com/jimmyg1997/suicide-prevention-survey/main/static/1.png", use_container_width=True)
+            st.image("https://raw.githubusercontent.com/jimmyg1997/suicide-prevention-survey/main/static/3.png", use_container_width=True)
             #st.markdown('<style><img src="https://drive.google.com/uc?id=1FSh-igr3BGwh71kRr-nNQBB-KvHfDPbt"</style> alt="" border="0">')
             doctor_name = st.text_input("Ονοματεπώνυμο Γιατρού", "")
             clinic = st.selectbox("Κλινική", ["Παθολογική", "Καρδιολογική", "Νεφρολογική", "Γυναικολογική", "Ορθοπαιδική"])
@@ -166,6 +166,8 @@ class SurveyHandler():
 
         # Right column: Questions
         with right_column:
+            #st.image("https://raw.githubusercontent.com/jimmyg1997/suicide-prevention-survey/main/static/4.png", use_container_width=True)
+
             # Initialize session state to track responses
             if 'responses' not in st.session_state:
                 st.session_state.responses = []
@@ -176,9 +178,9 @@ class SurveyHandler():
 
 
     def ask_q1(self, metadata):
-        st.markdown("1-6 ερωτήσεις, < 1 λεπτό συμπλήρωσης")
+        st.markdown("*1-6 ερωτήσεις, < 1 λεπτό συμπλήρωσης*")
         #st.markdown("*Το πολύ 6 ερωτήσεις και θα χρειαστείς το πολύ 40 δευτερόλεπτα για να τις απαντήσεις*.")
-        st.markdown("<h4 style='font-size: 20px;'>Ερώτηση 1: Σκέψεις-Ευχές θανάτου</h4>", unsafe_allow_html=True)
+        st.markdown("<h4 style='margin-top:-10px; margin-bottom:-30px;font-size: 20px;'>Ερώτηση 1: Σκέψεις-Ευχές θανάτου</h4>", unsafe_allow_html=True)
         #st.subheader("Ερώτηση 1: Σκέψεις-Ευχές θανάτου")
         q1 = st.radio(
             "Είχατε τον τελευταίο μήνα σκέψεις ότι δεν αξίζει η ζωή, ότι δεν θέλετε να ζείτε, ή όταν πάτε για ύπνο σκέπτεστε ότι θα ήταν καλύτερα να μην ξυπνήσετε;", 
@@ -198,7 +200,7 @@ class SurveyHandler():
 
 
     def ask_q2(self, metadata):
-        st.markdown("<h4 style='font-size: 20px;'>Ερώτηση 2: Ιστορικό Αποπειρών Αυτοκτονίας</h4>", unsafe_allow_html=True)
+        st.markdown("<h4 style='margin-top:-10px; margin-bottom:-30px;font-size: 20px;'>Ερώτηση 2: Ιστορικό Αποπειρών Αυτοκτονίας</h4>", unsafe_allow_html=True)
 
         q2 = st.radio(
             "Έχετε κάνει ποτέ κάποια απόπειρα αυτοκτονίας;",
@@ -211,7 +213,7 @@ class SurveyHandler():
 
 
     def ask_q3(self, metadata, q2):
-        st.markdown("<h4 style='font-size: 20px;'>Ερώτηση 3: Κληρονομικότητα</h4>", unsafe_allow_html=True)
+        st.markdown("<h4 style='margin-top:-10px; margin-bottom:-30px;font-size: 20px;'>Ερώτηση 3: Κληρονομικότητα</h4>", unsafe_allow_html=True)
         q3 = st.radio(
             "Υπάρχει κάποιο άτομο στο οικογενειακό σας περιβάλλον που έχει αυτοκτονήσει ή που έχει κάνει απόπειρα αυτοκτονίας;",
             options = ["Ναι", "Όχι"],
@@ -223,7 +225,7 @@ class SurveyHandler():
 
 
     def ask_q4(self, metadata, q2, q3):
-        st.markdown("<h4 style='font-size: 20px;'>Ερώτηση 4: Αυτοκτονικές Σκέψεις στο Παρόν</h4>", unsafe_allow_html=True)
+        st.markdown("<h4 style='margin-top:-10px; margin-bottom:-30px;font-size: 20px;'>Ερώτηση 4: Αυτοκτονικές Σκέψεις στο Παρόν</h4>", unsafe_allow_html=True)
         q4 = st.radio(
             "Είχατε τον τελευταίο μήνα σκέψεις να αυτοκτονήσετε / να βλάψετε τον εαυτό σας;",
             options = ["Ναι", "Όχι"],
@@ -248,7 +250,7 @@ class SurveyHandler():
 
 
     def ask_q5(self, metadata):
-        st.markdown("<h4 style='font-size: 20px;'>Ερώτηση 5: Αυτοκτονικό Πλάνο - Αυτοκτονική Πρόθεση</h4>", unsafe_allow_html=True)
+        st.markdown("<h4 style='margin-top:-10px; margin-bottom:-30px;font-size: 20px;'>Ερώτηση 5: Αυτοκτονικό Πλάνο - Αυτοκτονική Πρόθεση</h4>", unsafe_allow_html=True)
         q5 = st.radio(
             "Έχετε σκεφτεί με ποιον τρόπο θα αυτοκτονήσετε;",
             options = ["Ναι", "Όχι"],
@@ -268,7 +270,7 @@ class SurveyHandler():
 
 
     def ask_q6(self, metadata):
-        st.markdown("<h4 style='font-size: 20px;'>Ερώτηση 6: Πρόσβαση στον Τρόπο Αυτοκτονίας</h4>", unsafe_allow_html=True)
+        st.markdown("<h4 style='margin-top:-10px; margin-bottom:-30px;font-size: 20px;'>Ερώτηση 6: Πρόσβαση στον Τρόπο Αυτοκτονίας</h4>", unsafe_allow_html=True)
         q6 = st.radio(
             "Έχετε πρόσβαση στον τρόπο αυτοκτονίας που μου λέτε;",
             options = ["Ναι", "Όχι"],
