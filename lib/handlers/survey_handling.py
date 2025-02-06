@@ -50,45 +50,6 @@ class SurveyHandler():
             "Ερώτηση 6" : "[Πρόσβαση στον Τρόπο Αυτοκτονίας] Έχετε πρόσβαση στον τρόπο αυτοκτονίας που μου λέτε;"
         }
 
-         
-    # def get_base64_of_bin_file(self, bin_file):
-    #     """
-    #     function to read png file 
-    #     ----------
-    #     bin_file: png -> the background image in local folder
-    #     """
-    #     with open(bin_file, 'rb') as f:
-    #         data = f.read()
-    #     return base64.b64encode(data).decode()
-
-    # def set_background(self, image_path):
-    #     """
-    #     function to display png as bg
-    #         image_path: png -> the background image in local folder
-    #     """
-    #     bin_str = self.get_base64_of_bin_file(image_path)
-    #     page_bg_img = '''
-    #     <style>
-    #     st.App {
-    #     background-image: url("data:image/png;base64,%s");
-    #     background-size: cover;
-    #     }
-    #     </style>
-    #     ''' % bin_str
-        
-    #     st.markdown(page_bg_img, unsafe_allow_html=True)
-
-    # def set_background(self, image_path):
-    #     """ Sets a background image with reduced transparency in Streamlit."""
-    #     background_style = f"""
-    #     <style>
-    #     body {
-    #         background-image: url('{image_path}');
-    #         background-size: cover;
-    #     }
-    #     </style>
-    #     """
-    #     st.markdown(background_style, unsafe_allow_html=True)
 
 
     def set_background(self, image_path: str, opacity: float = 0.1):
@@ -105,7 +66,7 @@ class SurveyHandler():
             .stApp {{
                 background: linear-gradient(rgba(255,255,255, {1-opacity}), rgba(255,255,255, {1-opacity})), 
                             url("{image_path}") no-repeat center center fixed;
-                background-size: cover;
+                background-size: 80%;
             }}
             </style>
             """,
@@ -137,7 +98,19 @@ class SurveyHandler():
         )
 
     def get_survey_result(self):
-        st.title("Ερωτηματολόγιο Αξιολόγησης Αυτοκτονικού Κινδύνου Ασθενή")
+        # st.title("Ερωτηματολόγιο Αξιολόγησης Αυτοκτονικού Κινδύνου Ασθενή")
+
+        st.markdown(
+            """
+            <h1 style="display: flex; align-items: center;">
+            Ερωτηματολόγιο Αξιολόγησης Αυτοκτονικού Κινδύνου Ασθενή
+                <img src="https://raw.githubusercontent.com/jimmyg1997/suicide-prevention-survey/main/static/2.png" 
+                    alt="Logo" style="width: 100px; ">
+                
+            </h1>
+            """,
+            unsafe_allow_html=True
+        )
         
         # Create two columns
         left_column, right_column = st.columns([1, 3])  # Adjust the ratio of column width
@@ -147,35 +120,50 @@ class SurveyHandler():
 
         with left_column:
             st.image("https://raw.githubusercontent.com/jimmyg1997/suicide-prevention-survey/main/static/8.png", use_container_width=True)
+            st.markdown("*Όλα τα πεδία είναι προαιρετικά*")
             #st.markdown('<style><img src="https://drive.google.com/uc?id=1FSh-igr3BGwh71kRr-nNQBB-KvHfDPbt"</style> alt="" border="0">')
-            doctor_name = st.text_input("Ονοματεπώνυμο Γιατρού", "")
+            #doctor_name = st.text_input("Ονοματεπώνυμο Γιατρού", "")
             clinic = st.selectbox("Κλινική", ["Παθολογική", "Καρδιολογική", "Νεφρολογική", "Γυναικολογική", "Ορθοπαιδική"])
-            patient_name = st.text_input("Ονοματεπώνυμο Ασθενή", "")
+            #patient_name = st.text_input("Ονοματεπώνυμο Ασθενή", "")
             patient_age = st.text_input("Ηλικία Ασθενή", "")
+            patient_gender = st.selectbox("Γένος", ["ΑΡΡΕΝ", "ΘΗΛΥ"])
             patient_vat = st.text_input("AMKA Ασθενή", "")
             patient_arrival = st.selectbox("Προέλευση Ασθενή", ["Τ.Ε.Π.", "Εξωτερικά Ιατρεία"])
+            survey_reason = st.selectbox("Λόγος συμπλήρωσης ερωτηματολογίου", ["Απόπειρα Αυτοκτονίας", "Σκέψεις αυτοκτονίας/Θανάτου/απελπισίας", "Αυτοτραυματισμός"])
+
+            metadata = {
+                #"doctor_name"     : doctor_name,
+                "clinic"          : clinic,
+                #"patient_name"    : patient_name,
+                "patient_age"     : patient_age,
+                "patient_gender"  : patient_gender,
+                "patient_vat"     : patient_vat,
+                "patient_arrival" : patient_arrival
+                "survey_reason"   : survey_reason
+            }
 
             st.image("https://raw.githubusercontent.com/jimmyg1997/suicide-prevention-survey/main/static/9.png", use_container_width=True)
 
-            metadata = {
-                "doctor_name"     : doctor_name,
-                "clinic"          : clinic,
-                "patient_name"    : patient_name,
-                "patient_age"     : patient_age,
-                "patient_vat"     : patient_vat,
-                "patient_arrival" : patient_arrival
-            }
-
         # Right column: Questions
         with right_column:
+            # image_path = "https://raw.githubusercontent.com/jimmyg1997/suicide-prevention-survey/main/static/7.png"
+            # opacity = 0.6
             # st.markdown(
-            #     """
-            #     <div style="display: flex; justify-content: center;">
-            #         <img src="https://raw.githubusercontent.com/jimmyg1997/suicide-prevention-survey/main/static/3.png" width="250">
-            #     </div>
+            #     f"""
+            #     <style>
+            #     /* Target only the second column in the layout */
+            #     .stColumn:nth-child(2) {{
+            #         background: linear-gradient(rgba(255,255,255,{opacity}), rgba(255,255,255,{opacity})), 
+            #                     url("{image_path}") no-repeat center center fixed;
+            #         background-size: cover;
+            #         background-position: center;
+            #         padding: 10px;  /* Optional: add padding to ensure content doesn't overlap */
+            #     }}
+            #     </style>
             #     """,
             #     unsafe_allow_html=True
             # )
+                    
             #st.image("https://raw.githubusercontent.com/jimmyg1997/suicide-prevention-survey/main/static/3.png", width=250) #use_container_width=True)
             #st.image("https://raw.githubusercontent.com/jimmyg1997/suicide-prevention-survey/main/static/4.png", use_container_width=True)
 
@@ -335,12 +323,13 @@ class SurveyHandler():
     def store_response(self, question_idx, question, answer, metadata, result):
         response = {
             "Timestamp": dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            "Ονοματεπώνυμο Γιατρού": metadata["doctor_name"],
+            #"Ονοματεπώνυμο Γιατρού": metadata["doctor_name"],
             #"ΑΦΜ Γιατρού": metadata["doctor_id"],
             "Κλινική": metadata["clinic"],
-            "Ονοματεπώνυμο Ασθενή": metadata["patient_name"],
-            "ΑΜΚΑ Ασθενή": metadata["patient_vat"],
+            #"Ονοματεπώνυμο Ασθενή": metadata["patient_name"],
             "Ηλικία Ασθενή": metadata["patient_age"],
+            "Γένος Ασθενή": metadata["patient_gender"],
+            "ΑΜΚΑ Ασθενή": metadata["patient_vat"],
             "Προέλευση Ασθενή": metadata["patient_arrival"],
             "Ερώτηση (idx)": question_idx,
             "Ερωτήση": question,
@@ -357,40 +346,38 @@ class SurveyHandler():
             sheets_reporter_tab_survey_results : str
         ):
         # Create two columns
-        left_column, right_column = st.columns([1, 2])  # Adjust the ratio of column width
 
-        with right_column :
-            # Log results with timestamp
-            if st.button("Submit Response"):
-                # Converting responses to DataFrame
-                if 'responses' in st.session_state:
-                    df = pd.DataFrame(st.session_state.responses)
-                    print(df)
+        # Log results with timestamp
+        if st.button("Submit Response"):
+            # Converting responses to DataFrame
+            if 'responses' in st.session_state:
+                df = pd.DataFrame(st.session_state.responses)
+                print(df)
 
-                    df = df.sort_values('Timestamp')\
-                        .drop_duplicates('Ερωτήση', keep='last')\
-                        .sort_values('Ερώτηση (idx)')
+                df = df.sort_values('Timestamp')\
+                    .drop_duplicates('Ερωτήση', keep='last')\
+                    .sort_values('Ερώτηση (idx)')
 
-                    # Save to CSV
-                    # timestamp = dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                    # df.to_csv(
-                    #     path_or_buf = f"storage/responses_{timestamp}.csv", 
-                    #     mode        = "a", 
-                    #     header      = False, 
-                    #     index       = False
-                    # )
-                    st.success("Response submitted successfully!")
-                    st.dataframe(df)
+                # Save to CSV
+                # timestamp = dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                # df.to_csv(
+                #     path_or_buf = f"storage/responses_{timestamp}.csv", 
+                #     mode        = "a", 
+                #     header      = False, 
+                #     index       = False
+                # )
+                st.success("Response submitted successfully!")
+                st.dataframe(df)
 
 
-                    # Save to Google Sheets
-                    self.data_loader.append_data_to_google_sheets(
-                        df                     = df,
-                        spreadsheet_id         = sheets_reporter_id,
-                        spreadsheet_range_name = sheets_reporter_tab_survey_results,
-                    )
+                # Save to Google Sheets
+                self.data_loader.append_data_to_google_sheets(
+                    df                     = df,
+                    spreadsheet_id         = sheets_reporter_id,
+                    spreadsheet_range_name = sheets_reporter_tab_survey_results,
+                )
 
-                    return df
-                else:
-                    st.warning("No responses available to create the dataframe.")
-                    return None
+                return df
+            else:
+                st.warning("No responses available to create the dataframe.")
+                return None
