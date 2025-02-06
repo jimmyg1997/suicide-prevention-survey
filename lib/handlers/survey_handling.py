@@ -135,7 +135,7 @@ class SurveyHandler():
             /* Adjust the font size for mobile screens */
             @media (max-width: 768px) {
                 h1 {
-                    font-size: 1.0rem;  /* Smaller font size for mobile */
+                    font-size: 0.3rem;  /* Smaller font size for mobile */
                 }
             }
             </style>
