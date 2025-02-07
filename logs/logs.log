@@ -9602,3 +9602,20 @@
 2025-02-06 18:06:04 - INFO - (GoogleDriveAPI.build_client) Service build succeeded
 2025-02-06 18:06:04 - INFO - (GoogleDocsAPI.build_client) Service build succeeded
 2025-02-06 18:06:04 - INFO - (Controller.run) All services initilalized
+2025-02-06 18:07:55 - INFO - -------------------------------------- Suicide Prevention Survey (suicide_prevention_survey) Started ..
+2025-02-06 18:07:55 - INFO - (GoogleSheetsAPI.build_client) Service build succeeded
+2025-02-06 18:07:55 - INFO - (GoogleEmailAPI.build_client) Service build succeeded
+2025-02-06 18:07:55 - INFO - (GoogleDriveAPI.build_client) Service build succeeded
+2025-02-06 18:07:55 - INFO - (GoogleDocsAPI.build_client) Service build succeeded
+2025-02-06 18:07:55 - INFO - (Controller.run) All services initilalized
+2025-02-06 18:10:27 - INFO - -------------------------------------- Suicide Prevention Survey (suicide_prevention_survey) Started ..
+2025-02-06 18:10:27 - INFO - (GoogleSheetsAPI.build_client) Service build succeeded
+2025-02-06 18:10:27 - INFO - (GoogleEmailAPI.build_client) Service build succeeded
+2025-02-06 18:10:27 - INFO - (GoogleDriveAPI.build_client) Service build succeeded
+2025-02-06 18:10:27 - INFO - (GoogleDocsAPI.build_client) Service build succeeded
+2025-02-06 18:10:27 - INFO - (Controller.run) All services initilalized
+2025-02-07 11:29:10 - INFO - (GoogleSheetsAPI.build_client) Service build succeeded
+2025-02-07 11:29:10 - INFO - (GoogleEmailAPI.build_client) Service build succeeded
+2025-02-07 11:29:10 - INFO - (GoogleDriveAPI.build_client) Service build succeeded
+2025-02-07 11:29:10 - INFO - (GoogleDocsAPI.build_client) Service build succeeded
+2025-02-07 11:29:10 - INFO - (Controller.run) All services initilalized
