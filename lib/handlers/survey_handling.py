@@ -127,40 +127,31 @@ class SurveyHandler():
         st.markdown(
             """
             <style>
-            /* Set the title to be responsive */
+            /* Responsive title */
             h1 {
-                font-size: 2.5rem;  /* Default font size for large screens */
+                font-size: 2.2vw;  /* Scales with screen width */
+                display: flex;
+                align-items: center;
             }
 
-            /* Adjust the font size for mobile screens */
+            /* Mobile adjustments */
             @media (max-width: 768px) {
                 h1 {
-                    font-size: 10px;  /* Smaller font size for mobile */
+                    font-size: 4.5vw; /* Adjust for mobile */
                 }
             }
-            <img src="https://raw.githubusercontent.com/jimmyg1997/suicide-prevention-survey/main/static/18.png" 
-                    alt="Logo" style="width: 100px; ">
+
+            /* Image styling to match text height */
+            h1 img {
+                height: 1em; /* Matches text height */
+                margin-left: 10px; /* Spacing between text and image */
+            }
             </style>
-            """,
-            unsafe_allow_html=True
-        )
-
-        # st.markdown(
-        #     """
-        #     <h1 style="display: flex; align-items: center;">
-        #     Ερωτηματολόγιο Αξιολόγησης Αυτοκτονικού Κινδύνου Ασθενή
-        #         <img src="https://raw.githubusercontent.com/jimmyg1997/suicide-prevention-survey/main/static/2.png" 
-        #             alt="Logo" style="width: 100px; ">
-                
-        #     </h1>
-        #     """,
-        #     unsafe_allow_html=True
-        # )
-
-        st.markdown(
-            """
-            <h1 style="display: flex; align-items: center;">
-            Ερωτηματολόγιο Αξιολόγησης Αυτοκτονικού Κινδύνου Ασθενή
+            
+            <h1>
+                Ερωτηματολόγιο Αξιολόγησης Αυτοκτονικού Κινδύνου Ασθενή
+                <img src="https://raw.githubusercontent.com/jimmyg1997/suicide-prevention-survey/main/static/18.png" 
+                    alt="Logo">
             </h1>
             """,
             unsafe_allow_html=True
