@@ -138,6 +138,8 @@ class SurveyHandler():
                     font-size: 10px;  /* Smaller font size for mobile */
                 }
             }
+            <img src="https://raw.githubusercontent.com/jimmyg1997/suicide-prevention-survey/main/static/18.png" 
+                    alt="Logo" style="width: 100px; ">
             </style>
             """,
             unsafe_allow_html=True
