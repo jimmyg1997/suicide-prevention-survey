@@ -361,7 +361,7 @@ class SurveyHandler():
 
             # HTML and JS to create a real popup
             # st.markdown(alert, unsafe_allow_html=True)
-            st.image("https://raw.githubusercontent.com/jimmyg1997/suicide-prevention-survey/main/static/15.png", width=100)
+            st.image("https://raw.githubusercontent.com/jimmyg1997/suicide-prevention-survey/main/static/16.png", width=100)
             # st.image("https://i.postimg.cc/hvYywVzB/2.png", width=100)
 
             # with st.expander("Υψηλός Κίνδυνος!", expanded=True):
