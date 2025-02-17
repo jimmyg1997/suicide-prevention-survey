@@ -240,17 +240,8 @@ class SurveyHandler():
             index = None # Do not preselect any option
         )
         result = ""
-
-        if q1 == "Ναι":
-            result = ""
-            self.store_response("Ερώτηση 1", self.questions["Ερώτηση 1"], q1, metadata, result)
-            self.ask_q2(metadata)
-
-        elif q1 == "Όχι" :
-            result = "Παρακολούθηση κατά την επόμενη επίσκεψη"
-            st.markdown(f'<p style="color:green;">{result}</p>', unsafe_allow_html=True)
-            self.store_response("Ερώτηση 1", self.questions["Ερώτηση 1"], q1, metadata, result)
-
+        self.store_response("Ερώτηση 1", self.questions["Ερώτηση 1"], q1, metadata, result)
+        self.ask_q2(metadata)
 
     def ask_q2(self, metadata):
         #st.markdown("*Το πολύ 6 ερωτήσεις και θα χρειαστείς το πολύ 40 δευτερόλεπτα για να τις απαντήσεις*.")
@@ -262,9 +253,16 @@ class SurveyHandler():
             index = None  # Do not preselect any option
         )
 
-        result = ""
-        self.store_response("Ερώτηση 2", self.questions["Ερώτηση 2"], q2, metadata, result)
-        self.ask_q3(metadata)
+        if q2 == "Ναι":
+            result = ""
+            self.store_response("Ερώτηση 2", self.questions["Ερώτηση 2"], q2, metadata, result)
+            self.ask_q3(metadata)
+
+        elif q2 == "Όχι" :
+            result = "Παρακολούθηση κατά την επόμενη επίσκεψη"
+            st.markdown(f'<p style="color:green;">{result}</p>', unsafe_allow_html=True)
+            self.store_response("Ερώτηση 2", self.questions["Ερώτηση 2"], q2, metadata, result)
+
 
 
     def ask_q3(self, metadata):
