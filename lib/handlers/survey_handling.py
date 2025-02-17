@@ -304,7 +304,7 @@ class SurveyHandler():
             self.ask_q6(metadata)
 
         elif q5 == "Όχι" :
-            result = "Προτείνεται επίσκεψη σε ειδικό ψυχικής υγείας"
+            result = "Προτείνετε επίσκεψη σε ειδικό ψυχικής υγείας"
             self.store_response("Ερώτηση 5", self.questions["Ερώτηση 5"], q5, metadata, result)
             st.markdown(f'<p style="color:orange;">{result}</p>', unsafe_allow_html=True)
 
@@ -324,7 +324,7 @@ class SurveyHandler():
             self.ask_q7(metadata)
 
         elif q6 == "Όχι" :
-            result = "Προτείνεται άμεση επίσκεψη σε ψυχίατρο"
+            result = "Προτείνετε άμεση επίσκεψη σε ψυχίατρο"
             st.markdown(f'<p style="color:red;">{result}</p>', unsafe_allow_html=True)
             self.store_response("Ερώτηση 6", self.questions["Ερώτηση 6"], q6, metadata, result)
 
@@ -378,7 +378,7 @@ class SurveyHandler():
             #     st.warning("Υψηλός Κίνδυνος... Επείγουσα Αντίδραση Απαιτείται!")
         
         elif q7 == "Όχι" :
-            result = "Συστήνεται άμεση επίσκεψη σε ψυχίατρο, ενημέρωση συγγενών"
+            result = "Συστήνετε άμεση επίσκεψη σε ψυχίατρο, ενημέρωση συγγενών"
             self.store_response("Ερώτηση 7", self.questions["Ερώτηση 7"], q7, metadata, result)
             st.markdown(f'<p style="color:red;">{result}</p>', unsafe_allow_html=True)
 

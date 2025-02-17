@@ -10454,3 +10454,9 @@
 2025-02-17 16:12:45 - INFO - (GoogleSheetsAPI.df_to_list) DataFrame converted to list successfully
 2025-02-17 16:12:48 - INFO - Updated range: survey_results!A80:K86, Rows updated: 7
 2025-02-17 16:12:48 - INFO - (DataHandler.append_data_to_google_sheets) Data Appended 
+2025-02-17 16:13:15 - INFO - -------------------------------------- Suicide Prevention Survey (suicide_prevention_survey) Started ..
+2025-02-17 16:13:15 - INFO - (GoogleSheetsAPI.build_client) Service build succeeded
+2025-02-17 16:13:15 - INFO - (GoogleEmailAPI.build_client) Service build succeeded
+2025-02-17 16:13:15 - INFO - (GoogleDriveAPI.build_client) Service build succeeded
+2025-02-17 16:13:15 - INFO - (GoogleDocsAPI.build_client) Service build succeeded
+2025-02-17 16:13:15 - INFO - (Controller.run) All services initilalized
