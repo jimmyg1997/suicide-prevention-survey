@@ -41,13 +41,23 @@ class SurveyHandler():
         self.data_loader = data_loader
 
         ## Survey
+
+#         Ερώτηση 1: Καταθλιπτικό επεισόδιο
+# Είχατε περάσει ποτέ διάστημα πάνω από 10 μέρες που είχατε άσχημη διάθεση, πηγαίνατε
+# με το ζόρι στην δουλειά , είχατε αυπνία η υπνηλία, αισθανόσασταν κουρασμένος,
+# καταθλιπτικός;
+#  Είτε η απάντηση είναι &quot;Ναι&quot;, είτε είναι &quot;Οχι&quot;, το ερωτηματολόγιο ανοίγει την
+# Ερώτηση 2
+
+
         self.questions = {
-            "Ερώτηση 1" : "[Σκέψεις-Ευχές θανάτου] Είχατε τον τελευταίο μήνα σκέψεις ότι δεν αξίζει η ζωή, ότι δεν θέλετε να ζείτε, ή όταν πάτε για ύπνο σκέπτεστε ότι θα ήταν καλύτερα να μην ξυπνήσετε;",
-            "Ερώτηση 2" : "[Ιστορικό Αποπειρών Αυτοκτονίας] Έχετε κάνει ποτέ κάποια απόπειρα αυτοκτονίας;",
-            "Ερώτηση 3" : "[Κληρονομικότητα] Υπάρχει κάποιο άτομο στο οικογενειακό σας περιβάλλον που έχει αυτοκτονήσει ή που έχει κάνει απόπειρα αυτοκτονίας;",
-            "Ερώτηση 4" : "[Αυτοκτονικές Σκέψεις στο Παρόν] Είχατε τον τελευταίο μήνα σκέψεις να αυτοκτονήσετε / να βλάψετε τον εαυτό σας;",
-            "Ερώτηση 5" : "[Αυτοκτονικό Πλάνο - Αυτοκτονική Πρόθεση] Έχετε σκεφτεί με ποιον τρόπο θα αυτοκτονήσετε;",
-            "Ερώτηση 6" : "[Πρόσβαση στον Τρόπο Αυτοκτονίας] Έχετε πρόσβαση στον τρόπο αυτοκτονίας που μου λέτε;"
+            "Ερώτηση 1" : "[Καταθλιπτικό επεισόδιο] Είχατε περάσει ποτέ διάστημα πάνω από 10 μέρες που είχατε άσχημη διάθεση, πηγαίνατε με το ζόρι στην δουλειά , είχατε αυπνία η υπνηλία, αισθανόσασταν κουρασμένος, καταθλιπτικός;",
+            "Ερώτηση 2" : "[Σκέψεις-Ευχές θανάτου] Είχατε τον τελευταίο μήνα σκέψεις ότι δεν αξίζει η ζωή, ότι δεν θέλετε να ζείτε, ή όταν πάτε για ύπνο σκέπτεστε ότι θα ήταν καλύτερα να μην ξυπνήσετε;",
+            "Ερώτηση 3" : "[Ιστορικό Αποπειρών Αυτοκτονίας] Έχετε κάνει ποτέ κάποια απόπειρα αυτοκτονίας;",
+            "Ερώτηση 4" : "[Κληρονομικότητα, Ευαλοτώτητα] Υπάρχει κάποιο άτομο στο οικογενειακό σας περιβάλλον που έχει αυτοκτονήσει ή που έχει κάνει απόπειρα αυτοκτονίας;",
+            "Ερώτηση 5" : "[Αυτοκτονικές Σκέψεις στο Παρόν] Είχατε τον τελευταίο μήνα σκέψεις να αυτοκτονήσετε / να βλάψετε τον εαυτό σας;",
+            "Ερώτηση 6" : "[Αυτοκτονικό Πλάνο - Αυτοκτονική Πρόθεση] Έχετε σκεφτεί με ποιον τρόπο θα αυτοκτονήσετε;",
+            "Ερώτηση 7" : "[Πρόσβαση στον Τρόπο Αυτοκτονίας] Έχετε πρόσβαση στον τρόπο αυτοκτονίας που μου λέτε;"
         }
 
         self.clinics = [
@@ -76,7 +86,7 @@ class SurveyHandler():
 
 
 
-    def set_background(self, image_path: str, opacity: float = 0.1):
+    def set_background(self, image_path: str, opacity: float = 0.3):
         """
         Sets a background image in a Streamlit app with reduced opacity.
 
@@ -218,86 +228,74 @@ class SurveyHandler():
                 st.session_state.responses = []
             
             # Start Questionnaire
+            st.markdown("*1-7 ερωτήσεις, < 1 λεπτό συμπλήρωσης*")
             self.ask_q1(metadata)
 
-
-
     def ask_q1(self, metadata):
-        st.markdown("*1-6 ερωτήσεις, < 1 λεπτό συμπλήρωσης*")
-        #st.markdown("*Το πολύ 6 ερωτήσεις και θα χρειαστείς το πολύ 40 δευτερόλεπτα για να τις απαντήσεις*.")
-        st.markdown("<h4 style='margin-top:-10px; margin-bottom:-30px;font-size: 20px;'>Ερώτηση 1: Σκέψεις-Ευχές θανάτου</h4>", unsafe_allow_html=True)
-        #st.subheader("Ερώτηση 1: Σκέψεις-Ευχές θανάτου")
+        st.markdown("<h4 style='margin-top:-10px; margin-bottom:-30px;font-size: 20px;'>Ερώτηση 1: Καταθλιπτικό επεισόδιο</h4>", unsafe_allow_html=True)
+        
         q1 = st.radio(
-            "Είχατε τον τελευταίο μήνα σκέψεις ότι δεν αξίζει η ζωή, ότι δεν θέλετε να ζείτε, ή όταν πάτε για ύπνο σκέπτεστε ότι θα ήταν καλύτερα να μην ξυπνήσετε;", 
+            "Είχατε περάσει ποτέ διάστημα πάνω από 10 μέρες που είχατε άσχημη διάθεση, πηγαίνατε με το ζόρι στην δουλειά , είχατε αυπνία η υπνηλία, αισθανόσασταν κουρασμένος, καταθλιπτικός;",
             options = ["Ναι", "Όχι"],
-            index = None  # Do not preselect any option
+            index = None # Do not preselect any option
         )
+        result = ""
 
         if q1 == "Ναι":
             result = ""
             self.store_response("Ερώτηση 1", self.questions["Ερώτηση 1"], q1, metadata, result)
             self.ask_q2(metadata)
 
-        elif q1 == "Όχι":
+        elif q1 == "Όχι" :
             result = "Παρακολούθηση κατά την επόμενη επίσκεψη"
-            self.store_response("Ερώτηση 1", self.questions["Ερώτηση 1"], q1, metadata, result)
             st.markdown(f'<p style="color:green;">{result}</p>', unsafe_allow_html=True)
+            self.store_response("Ερώτηση 1", self.questions["Ερώτηση 1"], q1, metadata, result)
 
 
     def ask_q2(self, metadata):
-        st.markdown("<h4 style='margin-top:-10px; margin-bottom:-30px;font-size: 20px;'>Ερώτηση 2: Ιστορικό Αποπειρών Αυτοκτονίας</h4>", unsafe_allow_html=True)
-
+        #st.markdown("*Το πολύ 6 ερωτήσεις και θα χρειαστείς το πολύ 40 δευτερόλεπτα για να τις απαντήσεις*.")
+        st.markdown("<h4 style='margin-top:-10px; margin-bottom:-30px;font-size: 20px;'>Ερώτηση 2: Σκέψεις-Ευχές θανάτου</h4>", unsafe_allow_html=True)
+        #st.subheader("Ερώτηση 1: Σκέψεις-Ευχές θανάτου")
         q2 = st.radio(
+            "Είχατε τον τελευταίο μήνα σκέψεις ότι δεν αξίζει η ζωή, ότι δεν θέλετε να ζείτε, ή όταν πάτε για ύπνο σκέπτεστε ότι θα ήταν καλύτερα να μην ξυπνήσετε;", 
+            options = ["Ναι", "Όχι"],
+            index = None  # Do not preselect any option
+        )
+
+        result = ""
+        self.store_response("Ερώτηση 2", self.questions["Ερώτηση 2"], q2, metadata, result)
+        self.ask_q3(metadata)
+
+
+    def ask_q3(self, metadata):
+        st.markdown("<h4 style='margin-top:-10px; margin-bottom:-30px;font-size: 20px;'>Ερώτηση 3: Ιστορικό Αποπειρών Αυτοκτονίας</h4>", unsafe_allow_html=True)
+
+        q3 = st.radio(
             "Έχετε κάνει ποτέ κάποια απόπειρα αυτοκτονίας;",
             options = ["Ναι", "Όχι"],
             index = None # Do not preselect any option
         )
         result = ""
-        self.store_response("Ερώτηση 2", self.questions["Ερώτηση 2"], q2, metadata, result)
-        self.ask_q3(metadata, q2)
+        self.store_response("Ερώτηση 3", self.questions["Ερώτηση 3"], q3, metadata, result)
+        self.ask_q4(metadata)
 
 
-    def ask_q3(self, metadata, q2):
-        st.markdown("<h4 style='margin-top:-10px; margin-bottom:-30px;font-size: 20px;'>Ερώτηση 3: Κληρονομικότητα</h4>", unsafe_allow_html=True)
-        q3 = st.radio(
+    def ask_q4(self, metadata):
+        st.markdown("<h4 style='margin-top:-10px; margin-bottom:-30px;font-size: 20px;'>Ερώτηση 4: Κληρονομικότητα, Ευαλοτώτητα</h4>", unsafe_allow_html=True)
+        q4 = st.radio(
             "Υπάρχει κάποιο άτομο στο οικογενειακό σας περιβάλλον που έχει αυτοκτονήσει ή που έχει κάνει απόπειρα αυτοκτονίας;",
             options = ["Ναι", "Όχι"],
             index = None # Do not preselect any option
         )
         result = ""
-        self.store_response("Ερώτηση 3", self.questions["Ερώτηση 3"], q3, metadata, result)
-        self.ask_q4(metadata, q2, q3)
-
-
-    def ask_q4(self, metadata, q2, q3):
-        st.markdown("<h4 style='margin-top:-10px; margin-bottom:-30px;font-size: 20px;'>Ερώτηση 4: Αυτοκτονικές Σκέψεις στο Παρόν</h4>", unsafe_allow_html=True)
-        q4 = st.radio(
-            "Είχατε τον τελευταίο μήνα σκέψεις να αυτοκτονήσετε / να βλάψετε τον εαυτό σας;",
-            options = ["Ναι", "Όχι"],
-            index = None,  # Do not preselect any option
-        )
-
-        if q4 == "Ναι":
-            result = ""
-            self.store_response("Ερώτηση 4", self.questions["Ερώτηση 4"], q4, metadata, result)
-            self.ask_q5(metadata)
-
-        elif q4 == "Όχι" :
-            if q2 == "Ναι" or q3 == "Ναι":
-                result = "Παραπομπή σε ψυχίατρο"
-                self.store_response("Ερώτηση 4", self.questions["Ερώτηση 4"], q4, metadata, result)
-                st.markdown(f'<p style="color:orange;">{result}</p>', unsafe_allow_html=True)
-            else:
-                result = "Παραπομπή σε ειδικό ψυχικής υγείας"
-                self.store_response("Ερώτηση 4", self.questions["Ερώτηση 4"], q4, metadata, result)
-                st.markdown(f'<p style="color:yellow;">{result}</p>', unsafe_allow_html=True)
-
+        self.store_response("Ερώτηση 4", self.questions["Ερώτηση 4"], q4, metadata, result)
+        self.ask_q5(metadata)
 
 
     def ask_q5(self, metadata):
-        st.markdown("<h4 style='margin-top:-10px; margin-bottom:-30px;font-size: 20px;'>Ερώτηση 5: Αυτοκτονικό Πλάνο - Αυτοκτονική Πρόθεση</h4>", unsafe_allow_html=True)
+        st.markdown("<h4 style='margin-top:-10px; margin-bottom:-30px;font-size: 20px;'>Ερώτηση 5: Αυτοκτονικές Σκέψεις στο Παρόν</h4>", unsafe_allow_html=True)
         q5 = st.radio(
-            "Έχετε σκεφτεί με ποιον τρόπο θα αυτοκτονήσετε;",
+            "Είχατε τον τελευταίο μήνα σκέψεις να αυτοκτονήσετε / να βλάψετε τον εαυτό σας;",
             options = ["Ναι", "Όχι"],
             index = None,  # Do not preselect any option
         )
@@ -308,23 +306,43 @@ class SurveyHandler():
             self.ask_q6(metadata)
 
         elif q5 == "Όχι" :
-            result = "Παραπομπή σε ψυχίατρο και follow-up"
-            st.markdown(f'<p style="color:orange;">{result}</p>', unsafe_allow_html=True)
+            result = "Προτείνεται επίσκεψη σε ειδικό ψυχικής υγείας"
             self.store_response("Ερώτηση 5", self.questions["Ερώτηση 5"], q5, metadata, result)
+            st.markdown(f'<p style="color:orange;">{result}</p>', unsafe_allow_html=True)
 
 
 
     def ask_q6(self, metadata):
-        st.markdown("<h4 style='margin-top:-10px; margin-bottom:-30px;font-size: 20px;'>Ερώτηση 6: Πρόσβαση στον Τρόπο Αυτοκτονίας</h4>", unsafe_allow_html=True)
+        st.markdown("<h4 style='margin-top:-10px; margin-bottom:-30px;font-size: 20px;'>Ερώτηση 6: Αυτοκτονικό Πλάνο - Αυτοκτονική Πρόθεση</h4>", unsafe_allow_html=True)
         q6 = st.radio(
-            "Έχετε πρόσβαση στον τρόπο αυτοκτονίας που μου λέτε;",
+            "Έχετε σκεφτεί με ποιον τρόπο θα αυτοκτονήσετε;",
             options = ["Ναι", "Όχι"],
             index = None,  # Do not preselect any option
         )
 
         if q6 == "Ναι":
-            result = "Υψηλός Κίνδυνος: Άμεση παραπομπή σε ψυχίατρο / νοσηλεία, αναγκαία η ενημέρωση συγγενών, follow-up"
+            result = ""
             self.store_response("Ερώτηση 6", self.questions["Ερώτηση 6"], q6, metadata, result)
+            self.ask_q7(metadata)
+
+        elif q6 == "Όχι" :
+            result = "Προτείνεται άμεση επίσκεψη σε ψυχίατρο"
+            st.markdown(f'<p style="color:red;">{result}</p>', unsafe_allow_html=True)
+            self.store_response("Ερώτηση 6", self.questions["Ερώτηση 6"], q6, metadata, result)
+
+
+
+    def ask_q7(self, metadata):
+        st.markdown("<h4 style='margin-top:-10px; margin-bottom:-30px;font-size: 20px;'>Ερώτηση 7: Πρόσβαση στον Τρόπο Αυτοκτονίας</h4>", unsafe_allow_html=True)
+        q7 = st.radio(
+            "Έχετε πρόσβαση στον τρόπο αυτοκτονίας που μου λέτε;",
+            options = ["Ναι", "Όχι"],
+            index = None,  # Do not preselect any option
+        )
+
+        if q7 == "Ναι":
+            result = "Υψηλός Κίνδυνος: Άμεση αξιολόγηση από ψυχίατρο / νοσηλεία, αναγκαία η ενημέρωση συγγενών, follow-up"
+            self.store_response("Ερώτηση 7", self.questions["Ερώτηση 7"], q7, metadata, result)
             st.markdown(f'<p style="color:red;">{result}</p>', unsafe_allow_html=True)
 
             # Alternative approach 1
@@ -361,9 +379,9 @@ class SurveyHandler():
             #     st.image("https://i.postimg.cc/hvYywVzB/2.png")
             #     st.warning("Υψηλός Κίνδυνος... Επείγουσα Αντίδραση Απαιτείται!")
         
-        elif q6 == "Όχι" :
-            result = "Άμεση παραπομπή σε ψυχίατρο, follow-up, σύσταση για ενημέρωση συγγενών"
-            self.store_response("Ερώτηση 6", self.questions["Ερώτηση 6"], q6, metadata, result)
+        elif q7 == "Όχι" :
+            result = "Συστήνεται άμεση επίσκεψη σε ψυχίατρο, ενημέρωση συγγενών"
+            self.store_response("Ερώτηση 7", self.questions["Ερώτηση 7"], q7, metadata, result)
             st.markdown(f'<p style="color:red;">{result}</p>', unsafe_allow_html=True)
 
 
@@ -394,38 +412,40 @@ class SurveyHandler():
             sheets_reporter_tab_survey_results : str
         ):
         # Create two columns
+        left_column, right_column = st.columns([1, 3])  # Adjust the ratio of column width
 
         # Log results with timestamp
-        if st.button("Submit Response"):
-            # Converting responses to DataFrame
-            if 'responses' in st.session_state:
-                df = pd.DataFrame(st.session_state.responses)
-                print(df)
+        with right_column :
+            if st.button("Submit Response"):
+                # Converting responses to DataFrame
+                if 'responses' in st.session_state:
+                    df = pd.DataFrame(st.session_state.responses)
+                    print(df)
 
-                df = df.sort_values('Timestamp')\
-                    .drop_duplicates('Ερωτήση', keep='last')\
-                    .sort_values('Ερώτηση (idx)')
+                    df = df.sort_values('Timestamp')\
+                        .drop_duplicates('Ερωτήση', keep='last')\
+                        .sort_values('Ερώτηση (idx)')
 
-                # Save to CSV
-                # timestamp = dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                # df.to_csv(
-                #     path_or_buf = f"storage/responses_{timestamp}.csv", 
-                #     mode        = "a", 
-                #     header      = False, 
-                #     index       = False
-                # )
-                st.success("Response submitted successfully!")
-                st.dataframe(df)
+                    # Save to CSV
+                    # timestamp = dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                    # df.to_csv(
+                    #     path_or_buf = f"storage/responses_{timestamp}.csv", 
+                    #     mode        = "a", 
+                    #     header      = False, 
+                    #     index       = False
+                    # )
+                    st.success("Response submitted successfully!")
+                    st.dataframe(df)
 
 
-                # Save to Google Sheets
-                self.data_loader.append_data_to_google_sheets(
-                    df                     = df,
-                    spreadsheet_id         = sheets_reporter_id,
-                    spreadsheet_range_name = sheets_reporter_tab_survey_results,
-                )
+                    # Save to Google Sheets
+                    self.data_loader.append_data_to_google_sheets(
+                        df                     = df,
+                        spreadsheet_id         = sheets_reporter_id,
+                        spreadsheet_range_name = sheets_reporter_tab_survey_results,
+                    )
 
-                return df
-            else:
-                st.warning("No responses available to create the dataframe.")
-                return None
+                    return df
+                else:
+                    st.warning("No responses available to create the dataframe.")
+                    return None
