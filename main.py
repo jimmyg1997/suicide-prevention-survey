@@ -15,6 +15,7 @@ import functools as ft
 import pandas    as pd
 import datetime  as dt
 import streamlit as st
+import threading
 from urllib.parse    import unquote
 from bs4             import BeautifulSoup
 from tqdm            import tqdm
@@ -36,6 +37,7 @@ from lib.handlers.survey_handling import SurveyHandler
 from lib.modules.API_google import (
     GoogleAPI, GoogleSheetsAPI, GoogleEmailAPI, GoogleDocsAPI, GoogleDriveAPI
 )
+from lib.modules.API_dropbox import DropboxAPI
 
 # helpers
 import lib.helpers.utils as utils
@@ -105,10 +107,31 @@ class Controller():
             mk1         = self.mk1,
             data_loader = self.data_loader
         )
+
     
 
     def _refresh_session(self):
         self.run_initialization()
+
+
+    def _refresh_tokens(self):
+        ## _______________ *** Configuration (objects) *** _______________ #
+        self.dropbox_api = DropboxAPI(
+            mk1 = self.mk1
+        )
+
+        ## _______________ *** Configuration (attributes) *** _______________ #
+        google_oauth_accessed_dbx_path   = self.mk1.config.get("dropbox", "google_oauth_accessed_dbx_path")
+        google_oauth_local_path          = self.mk1.config.get("api_google", "token_file_path")
+        google_oauth_accessed_local_path = f"{google_oauth_local_path.rsplit('.', 1)[0]}_accessed.json"
+
+        ## _____________________________________________________________________________________________________________________ ##
+        self.dropbox_api.download_file(
+            dropbox_path = google_oauth_accessed_dbx_path,
+            local_path   = google_oauth_accessed_local_path
+        )
+        return 
+
 
 
     def run_get_survey_responses(self):
@@ -166,10 +189,10 @@ class Controller():
 
     ## -------------------------------------------------------------------------------------------------------------------------------------------- ##
     def run(self):
-        # initialize services
+        # initialize servicess
+        self._refresh_tokens() # Retrieve google oauth accessed token through dropbox
         self.run_initialization()
         self.mk1.logging.logger.info(f"(Controller.run) All services initilalized")
-
         self.run_get_survey_responses()
         
         

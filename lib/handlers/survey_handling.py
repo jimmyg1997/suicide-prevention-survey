@@ -433,8 +433,7 @@ class SurveyHandler():
                     #     index       = False
                     # )
                     st.success("Response submitted successfully!")
-                    st.dataframe(df)
-
+                    # st.dataframe(df)
 
                     # Save to Google Sheets
                     self.data_loader.append_data_to_google_sheets(
