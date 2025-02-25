@@ -23,12 +23,6 @@ google-api-python-client
 google-auth-httplib2
 google-auth-oauthlib==0.4.1
 oauth2client
-# tiktoken
-# openai
-# urllib3==1.26.20
-# python-telegram-bot==13.7
-# telegram
-# schedule
 
 
 ## ========================== Basic Modules
