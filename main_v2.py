@@ -180,3 +180,6 @@ def submit():
 
     return render_template("result.html")
 
+if __name__ == "__main__":
+    # Heroku sets the PORT environment variable automatically
+    app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 8600)))

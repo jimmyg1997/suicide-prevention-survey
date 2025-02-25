@@ -43,6 +43,7 @@ streamlit==1.41.0
 watchdog
 dropbox
 flask
+gunicorn
 
 ## ========================== Basic Modules for Machine Learning
 #scipy

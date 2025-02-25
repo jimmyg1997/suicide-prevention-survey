@@ -11176,3 +11176,23 @@
 2025-02-25 13:49:40 - INFO - (GoogleDriveAPI.build_client) Service build succeeded
 2025-02-25 13:49:40 - INFO - (GoogleDocsAPI.build_client) Service build succeeded
 2025-02-25 13:49:40 - INFO - (Controller.run) All services initilalized
+2025-02-25 14:13:24 - INFO - -------------------------------------- Suicide Prevention Survey (suicide_prevention_survey) Started ..
+2025-02-25 14:13:26 - INFO - (GoogleSheetsAPI.build_client) Service build succeeded
+2025-02-25 14:13:26 - INFO - (GoogleEmailAPI.build_client) Service build succeeded
+2025-02-25 14:13:26 - INFO - (GoogleDriveAPI.build_client) Service build succeeded
+2025-02-25 14:13:26 - INFO - (GoogleDocsAPI.build_client) Service build succeeded
+2025-02-25 14:13:26 - INFO - (Controller.run) All services initilalized
+2025-02-25 14:13:33 - INFO - (GoogleSheetsAPI.build_client) Service build succeeded
+2025-02-25 14:13:33 - INFO - (GoogleEmailAPI.build_client) Service build succeeded
+2025-02-25 14:13:33 - INFO - (GoogleDriveAPI.build_client) Service build succeeded
+2025-02-25 14:13:33 - INFO - (GoogleDocsAPI.build_client) Service build succeeded
+2025-02-25 14:13:33 - INFO - (Controller.run) All services initilalized
+2025-02-25 14:13:33 - INFO - (GoogleSheetsAPI.df_to_list) DataFrame converted to list successfully
+2025-02-25 14:13:36 - INFO - Updated range: survey_results_v2!A23:J24, Rows updated: 2
+2025-02-25 14:13:36 - INFO - (DataHandler.append_data_to_google_sheets) Data Appended 
+2025-02-25 14:17:52 - INFO - -------------------------------------- Suicide Prevention Survey (suicide_prevention_survey) Started ..
+2025-02-25 14:17:53 - INFO - (GoogleSheetsAPI.build_client) Service build succeeded
+2025-02-25 14:17:53 - INFO - (GoogleEmailAPI.build_client) Service build succeeded
+2025-02-25 14:17:53 - INFO - (GoogleDriveAPI.build_client) Service build succeeded
+2025-02-25 14:17:53 - INFO - (GoogleDocsAPI.build_client) Service build succeeded
+2025-02-25 14:17:53 - INFO - (Controller.run) All services initilalized
