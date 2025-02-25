@@ -159,6 +159,8 @@ def submit():
     responses = []
     for question in QUESTIONS:
         answer = request.form.get(question["id"])
+        result = request.form.get(f"{question['id']}_message")  # Retrieve the message visibility
+
         
         if answer:
             responses.append({
@@ -166,6 +168,7 @@ def submit():
                 "question_id"    : question["id_full"],
                 "question_text"  : f"{question['title']}:{question['text']}",
                 "answer"         : answer,
+                "result"         : result
             })
     
     responses_df = pd.DataFrame(responses)

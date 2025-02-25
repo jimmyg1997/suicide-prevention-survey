@@ -30,8 +30,14 @@
     }
 
     h3 {
-      font-size: 22px;
-      margin-bottom: 15px;
+      font-size: 18px;
+      margin-bottom: 5px;
+    }
+
+    p {
+      font-size: 12px;
+      text-align: center;
+      font-style: italic;
     }
 
     .field {
@@ -146,6 +152,7 @@
       <!-- Demographic Fields -->
       <div class="section-title">
         <h3>Δημογραφικά Στοιχεία</h3>
+        <p> Όλα τα πεδία είναι προαιρετικά </p>
       </div>
 
       <!-- Fields -->
@@ -199,6 +206,7 @@
       <!-- Questions Section -->
       <div class="section-title">
         <h3>Ερωτήσεις</h3>
+        <p> 2-7 ερωτήσεις, < 1 λεπτό συμπλήρωσης </p>
       </div>
 
       <!-- Question 1 -->
@@ -218,11 +226,16 @@
         <h3>{{ questions[1].id_full }} : {{ questions[1].title }}</h3>
         <p class="question-text">{{ questions[1].text }}</p>
         {% for option in questions[1].options %}
-        <div class="option">
+        <div class="option"> 
           <input type="radio" name="q2" value="{{ option }}" id="q2_{{ loop.index }}" onclick="checkVisibility()">
           <label for="q2_{{ loop.index }}">{{ option }}</label>
         </div>
         {% endfor %}
+        <!-- Message for Q2 -->
+        <div id="q2-message" class="message" style="display: none;">
+          <input type="hidden" name="q2_message" id="q2_message" value="">
+          <span id="q2-message-text"></span>
+        </div>
       </div>
 
       <!-- Question 3 (Hidden by default) -->
@@ -259,6 +272,11 @@
           <label for="q5_{{ loop.index }}">{{ option }}</label>
         </div>
         {% endfor %}
+        <!-- Message for Q5 -->
+        <div id="q5-message" class="message" style="display: none;">
+          <input type="hidden" name="q5_message" id="q5_message" value="">
+          <span id="q5-message-text"></span>
+        </div>
       </div>
 
       <!-- Question 6 (Hidden by default) -->
@@ -271,6 +289,11 @@
           <label for="q6_{{ loop.index }}">{{ option }}</label>
         </div>
         {% endfor %}
+        <!-- Message for Q6 -->
+        <div id="q6-message" class="message" style="display: none;">
+          <input type="hidden" name="q6_message" id="q6_message" value="">
+          <span id="q6-message-text"></span>
+        </div>
       </div>
 
       <!-- Question 7 (Hidden by default) -->
@@ -283,6 +306,12 @@
           <label for="q7_{{ loop.index }}">{{ option }}</label>
         </div>
         {% endfor %}
+        <!-- Message for Q7 -->
+        <div id="q7-message" class="message" style="display: none;">
+          <input type="hidden" name="q7_message" id="q7_message" value="">
+          <span id="q7-message-text"></span>
+        </div>
+
       </div>
 
       <!-- Submit Button -->
@@ -304,27 +333,140 @@
         const q2Answer = document.querySelector('input[name="q2"]:checked');
         const q5Answer = document.querySelector('input[name="q5"]:checked');
         const q6Answer = document.querySelector('input[name="q6"]:checked');
+        const q7Answer = document.querySelector('input[name="q7"]:checked');
 
+        // Messages
+        const q2MessageElem = document.getElementById("q2-message");
+        const q5MessageElem = document.getElementById("q5-message");
+        const q6MessageElem = document.getElementById("q6-message");
+        const q7MessageElem = document.getElementById("q7-message");
+
+        // Messages Input
+        const q2MessageInputElem = document.getElementById("q2_message");
+        const q5MessageInputElem = document.getElementById("q5_message");
+        const q6MessageInputElem = document.getElementById("q6_message");
+        const q7MessageInputElem = document.getElementById("q7_message");
+
+        // Messages Input Text
+        const q2MessageTextElem = document.getElementById("q2-message-text");
+        const q5MessageTextElem = document.getElementById("q5-message-text");
+        const q6MessageTextElem = document.getElementById("q6-message-text");
+        const q7MessageTextElem = document.getElementById("q7-message-text");
+
+        // Reset messages
+        q2MessageElem.style.display = "none";
+        q5MessageElem.style.display = "none";
+        q6MessageElem.style.display = "none";
+        q7MessageElem.style.display = "none";
+
+        // Reset messages input
+        q2MessageInputElem.value = "";
+        q5MessageInputElem.value = "";
+        q6MessageInputElem.value = "";
+        q7MessageInputElem.value = "";
+
+
+
+        // Check for q2 ("Όχι")
+        if (q2Answer && q2Answer.value === "Όχι") {
+          const message = "Παρακολούθηση κατά την επόμενη επίσκεψη";
+          
+          q2MessageElem.style.display = "block";
+          // q2MessageElem.innerText     = message;
+          q2MessageTextElem.innerText = message;
+          q2MessageElem.style.color   = "green";
+          q2MessageInputElem.value    = message;
+        } 
+
+        // Check for q5 ("Όχι")
+        if (q5Answer && q5Answer.value === "Όχι") {
+          const message = "Προτείνετε επίσκεψη σε ειδικό ψυχικής υγείας";
+
+          q5MessageElem.style.display = "block";
+          // q5MessageElem.innerText     = message;
+          q5MessageTextElem.innerText = message;
+          q5MessageElem.style.color   = "orange";
+          q5MessageInputElem.value    = message;
+        } 
+
+        // Check for q6 ("Όχι")
+        if (q6Answer && q6Answer.value === "Όχι") {
+          const message = "Προτείνετε άμεση επίσκεψη σε ψυχίατρο";
+
+          q6MessageElem.style.display = "block";
+          // q6MessageElem.innerText     = message;
+          q6MessageTextElem.innerText = message;
+          q6MessageElem.style.color   = "red";
+          q6MessageInputElem.value    = message;
+        } 
+
+        // Check for q7 ("Όχι")
+        if (q7Answer && q7Answer.value === "Όχι") {
+          const message = "Συστήνετε άμεση επίσκεψη σε ψυχίατρο, ενημέρωση συγγενών";
+
+          q7MessageElem.style.display = "block";
+          //q7MessageElem.innerText     = message;
+          q7MessageTextElem.innerText = message;
+          q7MessageElem.style.color   = "red";
+          q7MessageInputElem.value    = message;
+
+
+        } else if (q7Answer && q7Answer.value === "Ναι"){
+          const message = "Υψηλός Κίνδυνος: Άμεση αξιολόγηση από ψυχίατρο / νοσηλεία, αναγκαία η ενημέρωση συγγενών, follow-up";
+
+          q7MessageElem.style.display = "block";
+          //q7MessageElem.innerText     = message;
+          q7MessageTextElem.innerText = message;
+          q7MessageElem.style.color   = "red";
+          q7MessageInputElem.value    = message;
+        } 
+ 
         // Show Question 3,4,5 if Question 2 answer is 'Ναι'
         const showQ3ToQ5 = q2Answer && q2Answer.value === 'Ναι';
-        document.getElementById('q3').style.display = showQ3ToQ5 ? 'block' : 'none';
-        document.getElementById('q4').style.display = showQ3ToQ5 ? 'block' : 'none';
-        document.getElementById('q5').style.display = showQ3ToQ5 ? 'block' : 'none';
+        const q3Elem = document.getElementById('q3');
+        const q4Elem = document.getElementById('q4');
+        const q5Elem = document.getElementById('q5');
+        if (q3Elem && q4Elem && q5Elem) {
+            q3Elem.style.display = showQ3ToQ5 ? 'block' : 'none';
+            q4Elem.style.display = showQ3ToQ5 ? 'block' : 'none';
+            q5Elem.style.display = showQ3ToQ5 ? 'block' : 'none';
+        }
 
         // Show Question 6 if Question 5 answer is 'Ναι'
-        document.getElementById('q6').style.display = (q5Answer && q5Answer.value === 'Ναι') ? 'block' : 'none';
+        const q6Elem = document.getElementById('q6');
+        if (q6Elem && q5Answer && q5Answer.value === 'Ναι') {
+            q6Elem.style.display = 'block';
+        } else if (q6Elem) {
+            q6Elem.style.display = 'none';
+        }
 
         // Show Question 7 if Question 6 answer is 'Ναι'
-        document.getElementById('q7').style.display = (q6Answer && q6Answer.value === 'Ναι') ? 'block' : 'none';
+        const q7Elem = document.getElementById('q7');
+        if (q7Elem && q6Answer && q6Answer.value === 'Ναι') {
+            q7Elem.style.display = 'block';
+        } else if (q7Elem) {
+            q7Elem.style.display = 'none';
+        }
+
+        // // Optionally, store messages for appending to Google Sheets
+        // window.messages = {
+        //     q2Message: messageQ2,
+        //     q5Message: messageQ5,
+        //     q6Message: messageQ6,
+        //     q7Message: messageQ7,
+        // };
     }
-    // Add event listeners to inputs for checking visibility when clicked
-    document.querySelectorAll('input[type="radio"]').forEach((radioButton) => {
-        radioButton.addEventListener('click', checkVisibility);
-    });
+
     // Ensure visibility is set correctly on page load
-    window.onload = function() {
-      checkVisibility();
-    };
+    document.addEventListener("DOMContentLoaded", function() {
+        // Add event listeners to inputs for checking visibility when clicked
+        document.querySelectorAll('input[type="radio"]').forEach((radioButton) => {
+            radioButton.addEventListener('click', checkVisibility);
+        });
+
+        // Run checkVisibility once when the page loads
+        checkVisibility();
+    }); 
   </script>
 
 {% endblock %}
