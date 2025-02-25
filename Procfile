@@ -1,1 +1,1 @@
-worker: bash run.sh
+worker: bash run_v2.sh

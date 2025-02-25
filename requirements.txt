@@ -48,6 +48,7 @@ bs4
 streamlit==1.41.0
 watchdog
 dropbox
+flask
 
 ## ========================== Basic Modules for Machine Learning
 #scipy

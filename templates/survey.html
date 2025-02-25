@@ -1,0 +1,330 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+  <!-- Set Background -->
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(rgba(255,255,255, 0.7), rgba(255,255,255, 0.7)), 
+                  url("https://raw.githubusercontent.com/jimmyg1997/suicide-prevention-survey/main/static/17.png") no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      color: #333;
+    }
+
+    /* Specific styles for form container */
+    .form-container {
+      width: 70%;
+      margin: 30px auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    h2, h3 {
+      text-align: center;
+      color: #004a99;
+    }
+
+    h3 {
+      font-size: 22px;
+      margin-bottom: 15px;
+    }
+
+    .field {
+      margin-bottom: 30px;
+    }
+
+    label {
+      font-size: 14px;
+      color: #444;
+      margin-bottom: 8px;
+      display: block;
+      font-weight: bold;
+    }
+
+    /* input[type="text"], input[type="number"], select {
+      width: 100%;
+      padding: 12px;
+      margin-top: 6px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+      background-color: #f9f9f9;
+    } */
+
+    /* Ensure all form elements have the same width */
+    input[type="text"], input[type="number"], select {
+        width: 100%; /* Ensures they take up the same width */
+        padding: 12px; /* Same padding for inputs and selects */
+        margin-top: 6px; 
+        border: 1px solid #ddd; 
+        border-radius: 5px; 
+        font-size: 16px; 
+        background-color: #f9f9f9;
+    }
+
+    /* Optional: Ensure equal box-sizing to avoid unexpected width changes */
+    input[type="text"], input[type="number"], select {
+        box-sizing: border-box; /* Ensures padding and borders are included in the element’s width */
+    }
+
+    .question {
+      margin-bottom: 20px;
+    }
+
+    .question-text {
+      font-size: 15px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    /* .option {
+      margin-bottom: 10px;
+    } */
+
+    .option {
+        display: inline-flex;
+        align-items: center; /* Vertically center the radio buttons and labels */
+        margin-bottom: 5px;
+        font-size: 18px; /* Increase font size of the labels */
+    }
+
+    input[type="radio"] {
+        margin-right: 5px; /* Add some space between radio button and label */
+        margin-bottom: 10px;
+        width: 20px; /* Make the radio button bigger */
+        height: 20px; /* Make the radio button bigger */
+        
+    }
+
+
+    .submit-btn {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    button {
+      padding: 14px 32px;
+      font-size: 18px;
+      color: #fff;
+      background-color: #004a99;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #003366;
+    }
+
+    .section-title {
+      border-bottom: 2px solid #004a99;
+      margin-bottom: 25px;
+      padding-bottom: 10px;
+    }
+
+    /* Style for images */
+    .image-container img {
+        max-width: 60%; /* Adjusts image size */
+        height: auto; /* Maintains aspect ratio */
+        display: block; /* Centers the image */
+        margin: 0 auto 20px; /* Centers the image and adds space below */
+    }
+  </style>
+
+  <!-- Display image before Demographics -->
+  <div class="image-container">
+    <img src="https://raw.githubusercontent.com/jimmyg1997/suicide-prevention-survey/main/static/8.png" alt="Pre Demographics Image">
+  </div>
+
+  <div class="form-container">
+    <form action="{{ url_for('submit') }}" method="POST">
+      <!-- Demographic Fields -->
+      <div class="section-title">
+        <h3>Δημογραφικά Στοιχεία</h3>
+      </div>
+
+      <!-- Fields -->
+      <div class="field">
+        <label for="clinic">Κλινική:</label>
+        <select name="clinic" id="clinic">
+          {% for clinic in clinics %}
+          <option value="{{ clinic }}">{{ clinic }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="patient_age">Ηλικία Ασθενή:</label>
+        <input type="number" name="patient_age" id="patient_age" placeholder="Πληκτρολογήστε την ηλικία">
+      </div>
+
+      <div class="field">
+        <label for="patient_gender">Γένος:</label>
+        <select name="patient_gender" id="patient_gender">
+          <option value=""></option>
+          <option value="ΑΡΡΕΝ">ΑΡΡΕΝ</option>
+          <option value="ΘΗΛΥ">ΘΗΛΥ</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="patient_vat">AMKA Ασθενή:</label>
+        <input type="text" name="patient_vat" id="patient_vat" placeholder="Αριθμός AMKA">
+      </div>
+
+      <div class="field">
+        <label for="patient_arrival">Προέλευση Ασθενή:</label>
+        <select name="patient_arrival" id="patient_arrival">
+            <option value=""></option>
+          <option value="Τ.Ε.Π">Τ.Ε.Π</option>
+          <option value="Εξωτερικά Ιατρεία">Εξωτερικά Ιατρεία</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="survey_reason">Λόγος Συμπλήρωσης:</label>
+        <select name="survey_reason" id="survey_reason">
+          <option value=""></option>
+          <option value="Απόπειρα Αυτοκτονίας">Απόπειρα Αυτοκτονίας</option>
+          <option value="Σκέψεις αυτοκτονίας/Θανάτου/απελπισίας">Σκέψεις αυτοκτονίας/Θανάτου/απελπισίας</option>
+          <option value="Αυτοτραυματισμός">Αυτοτραυματισμός</option>
+        </select>
+      </div>
+
+      <!-- Questions Section -->
+      <div class="section-title">
+        <h3>Ερωτήσεις</h3>
+      </div>
+
+      <!-- Question 1 -->
+      <div class="question">
+        <h3>{{ questions[0].id_full }} : {{ questions[0].title }}</h3>
+        <p class="question-text">{{ questions[0].text }}</p>
+        {% for option in questions[0].options %}
+        <div class="option">
+          <input type="radio" name="q1" value="{{ option }}" id="q1_{{ loop.index }}" onclick="checkVisibility()">
+          <label for="q1_{{ loop.index }}">{{ option }}</label>
+        </div>
+        {% endfor %}
+      </div>
+
+      <!-- Question 2 -->
+      <div class="question">
+        <h3>{{ questions[1].id_full }} : {{ questions[1].title }}</h3>
+        <p class="question-text">{{ questions[1].text }}</p>
+        {% for option in questions[1].options %}
+        <div class="option">
+          <input type="radio" name="q2" value="{{ option }}" id="q2_{{ loop.index }}" onclick="checkVisibility()">
+          <label for="q2_{{ loop.index }}">{{ option }}</label>
+        </div>
+        {% endfor %}
+      </div>
+
+      <!-- Question 3 (Hidden by default) -->
+      <div id="q3" class="question" style="display: none;">
+        <h3>{{ questions[2].id_full }} : {{ questions[2].title }}</h3>
+        <p class="question-text">{{ questions[2].text }}</p>
+        {% for option in questions[2].options %}
+        <div class="option">
+          <input type="radio" name="q3" value="{{ option }}" id="q3_{{ loop.index }}" onclick="checkVisibility()">
+          <label for="q3_{{ loop.index }}">{{ option }}</label>
+        </div>
+        {% endfor %}
+      </div>
+
+      <!-- Question 4 (Hidden by default) -->
+      <div id="q4" class="question" style="display: none;">
+        <h3>{{ questions[3].id_full }} : {{ questions[3].title }}</h3>
+        <p class="question-text">{{ questions[3].text }}</p>
+        {% for option in questions[3].options %}
+        <div class="option">
+          <input type="radio" name="q4" value="{{ option }}" id="q4_{{ loop.index }}" onclick="checkVisibility()">
+          <label for="q4_{{ loop.index }}">{{ option }}</label>
+        </div>
+        {% endfor %}
+      </div>
+
+      <!-- Question 5 (Hidden by default) -->
+      <div id="q5" class="question" style="display: none;">
+        <h3>{{ questions[4].id_full }} : {{ questions[4].title }}</h3>
+        <p class="question-text">{{ questions[4].text }}</p>
+        {% for option in questions[4].options %}
+        <div class="option">
+          <input type="radio" name="q5" value="{{ option }}" id="q5_{{ loop.index }}" onclick="checkVisibility()">
+          <label for="q5_{{ loop.index }}">{{ option }}</label>
+        </div>
+        {% endfor %}
+      </div>
+
+      <!-- Question 6 (Hidden by default) -->
+      <div id="q6" class="question" style="display: none;">
+        <h3>{{ questions[5].id_full }} : {{ questions[5].title }}</h3>
+        <p class="question-text">{{ questions[5].text }}</p>
+        {% for option in questions[5].options %}
+        <div class="option">
+          <input type="radio" name="q6" value="{{ option }}" id="q6_{{ loop.index }}" onclick="checkVisibility()">
+          <label for="q6_{{ loop.index }}">{{ option }}</label>
+        </div>
+        {% endfor %}
+      </div>
+
+      <!-- Question 7 (Hidden by default) -->
+      <div id="q7" class="question" style="display: none;">
+        <h3>{{ questions[6].id_full }} : {{ questions[6].title }}</h3>
+        <p class="question-text">{{ questions[6].text }}</p>
+        {% for option in questions[6].options %}
+        <div class="option">
+          <input type="radio" name="q7" value="{{ option }}" id="q7_{{ loop.index }}">
+          <label for="q7_{{ loop.index }}">{{ option }}</label>
+        </div>
+        {% endfor %}
+      </div>
+
+      <!-- Submit Button -->
+      <div class="submit-btn">
+        <button type="submit">Υποβολή</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Display image after Demographics -->
+  <div class="image-container">
+    <img src="https://raw.githubusercontent.com/jimmyg1997/suicide-prevention-survey/main/static/9.png" alt="Post Demographics Image">
+  </div>
+
+  <script>
+    // Function to check visibility of questions based on answers
+    function checkVisibility() {
+        // Get answers
+        const q2Answer = document.querySelector('input[name="q2"]:checked');
+        const q5Answer = document.querySelector('input[name="q5"]:checked');
+        const q6Answer = document.querySelector('input[name="q6"]:checked');
+
+        // Show Question 3,4,5 if Question 2 answer is 'Ναι'
+        const showQ3ToQ5 = q2Answer && q2Answer.value === 'Ναι';
+        document.getElementById('q3').style.display = showQ3ToQ5 ? 'block' : 'none';
+        document.getElementById('q4').style.display = showQ3ToQ5 ? 'block' : 'none';
+        document.getElementById('q5').style.display = showQ3ToQ5 ? 'block' : 'none';
+
+        // Show Question 6 if Question 5 answer is 'Ναι'
+        document.getElementById('q6').style.display = (q5Answer && q5Answer.value === 'Ναι') ? 'block' : 'none';
+
+        // Show Question 7 if Question 6 answer is 'Ναι'
+        document.getElementById('q7').style.display = (q6Answer && q6Answer.value === 'Ναι') ? 'block' : 'none';
+    }
+    // Add event listeners to inputs for checking visibility when clicked
+    document.querySelectorAll('input[type="radio"]').forEach((radioButton) => {
+        radioButton.addEventListener('click', checkVisibility);
+    });
+    // Ensure visibility is set correctly on page load
+    window.onload = function() {
+      checkVisibility();
+    };
+  </script>
+
+{% endblock %}

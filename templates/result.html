@@ -1,0 +1,79 @@
+
+
+{% extends 'base.html' %}
+
+{% block content %}
+  <!-- Set Background -->
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(rgba(255,255,255, 0.7), rgba(255,255,255, 0.7)), 
+                  url("https://raw.githubusercontent.com/jimmyg1997/suicide-prevention-survey/main/static/17.png") no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      color: #333;
+    }
+
+    /* Specific styles for form container */
+    .form-container {
+      width: 70%;
+      margin: 30px auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #004a99;
+    }
+
+    h3 {
+      font-size: 22px;
+      margin-bottom: 15px;
+    }
+
+    p {
+        text-align: center;
+    }
+
+    a {
+        display:block;
+        text-align: center;
+    }
+
+    .field {
+      margin-bottom: 30px;
+    }
+
+    label {
+      font-size: 14px;
+      color: #444;
+      margin-bottom: 8px;
+      display: block;
+      font-weight: bold;
+    }
+
+    .section-title {
+      border-bottom: 2px solid #004a99;
+      margin-bottom: 25px;
+      padding-bottom: 10px;
+    }
+
+    /* Style for images */
+    .image-container img {
+        max-width: 60%; /* Adjusts image size */
+        height: auto; /* Maintains aspect ratio */
+        display: block; /* Centers the image */
+        margin: 0 auto 20px; /* Centers the image and adds space below */
+    }
+  </style>
+
+    <h3>Ευχαριστούμε που ολοκληρώσατε τo ερωτηματολόγιο!</h3>
+    <p>Οι απαντήσεις σας υποβλήθηκαν με επιτυχία.</p>
+    <a href="{{ url_for('index') }}">Επιστροφή στο ερωτηματολόγιο</a>
+    
+
+{% endblock %}
